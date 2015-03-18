@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,7 +19,7 @@
 </head>
 <body>
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#navbar">
@@ -31,10 +32,11 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url('/') }}">Home</a></li>
-            </ul>
-
+            <a href="{{ route('playlists.create') }}" class="btn btn-success navbar-btn" data-toggle="tooltip"
+               data-placement="bottom" title="Create a new playlist">
+                <span class="sr-only">Create a new playlist</span>
+                <i class="fa fa-plus"></i>
+            </a>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
                     <li><a href="{{ url('/auth/login') }}">Login</a></li>
@@ -57,5 +59,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>
