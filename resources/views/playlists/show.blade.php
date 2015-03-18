@@ -18,7 +18,7 @@
                     <i class="fa fa-user"></i>
                     Author: {{ $playlist->user->name }}
                 </p>
-                <a href="" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
+                <a href="{{ route('playlists.fork', [$playlist]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
                     <i class="fa fa-code-fork fa-lg"></i>
                     <span class="sr-only">Fork this playlist</span>
                 </a>
@@ -55,7 +55,7 @@
 @section('scripts')
 <script>
     var songs = [];
-    var currentSong = 0;
+    var currentSong = null;
 
     function extractEmbeddableUrlFromHtml(html, site) {
         var segments = html.split(' ');
