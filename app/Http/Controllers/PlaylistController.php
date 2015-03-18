@@ -4,7 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Playlist;
-use Illuminate\Http\Request;
+use App\Http\Requests\PlaylistRequest;
 
 class PlaylistController extends Controller {
 
@@ -15,7 +15,9 @@ class PlaylistController extends Controller {
      */
 	public function index()
 	{
-		return view('playlists.index');
+		return view('playlists.index', [
+            'playlists' => Playlist::all()
+        ]);
 	}
 
     /**
@@ -33,9 +35,15 @@ class PlaylistController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(PlaylistRequest $request)
 	{
-		//
+		$playlist = new Playlist;
+
+        $playlist->name = $request->input('name');
+
+        $playlist->save();
+
+        return redirect('/');
 	}
 
     /**
