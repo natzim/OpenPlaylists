@@ -117,7 +117,7 @@ class PlaylistController extends Controller {
     }
 
     /**
-     * Forks a given playlist and associates it with the current user
+     * Fork a given playlist and associate it with the current user
      *
      * @param int $id Playlist ID
      *
