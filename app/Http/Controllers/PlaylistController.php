@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => [
+                'index',
+                'show',
+                'songs'
+            ]
+        ]);
+    }
+
     /**
      * Display list of all playlists
      *
