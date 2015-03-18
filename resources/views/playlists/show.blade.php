@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col-md-6">
                 <h1>{{ $playlist->name }}</h1>
-                @if(!empty($playlist->forkParent))
+                @if(!is_null($playlist->forkParent))
                     <p class="text-muted">
                         <i class="fa fa-code-fork"></i>
-                        Fork of <a href="{{ route('playlists.show', [$playlist]) }}">
+                        Fork of <a href="{{ route('playlists.show', [$playlist->forkParent]) }}">
                             {{ $playlist->forkParent->name }}
                         </a>
                     </p>
