@@ -15,7 +15,7 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
-Route::resource('playlist', 'PlaylistController');
+Route::resource('playlists', 'PlaylistController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
