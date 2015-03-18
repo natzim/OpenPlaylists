@@ -5,7 +5,10 @@
     <div class="row">
         <h1>Playlists</h1>
         @forelse ($playlists as $playlist)
-            <p>{{ $playlist->name }}</p>
+            <div class="well well-sm">
+                <span class="badge">{{ $playlist->songs->count() }}</span>
+                <a href="{{ route('playlists.show', [$playlist]) }}">{{ $playlist->name }}</a>
+            </div>
         @empty
             <p class="lead">Sorry, we couldn't find any playlists!</p>
         @endforelse
