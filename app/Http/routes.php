@@ -15,6 +15,8 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
+Route::get('playlists/{id}/songs', 'PlaylistController@songs');
+
 Route::resource('playlists', 'PlaylistController');
 
 Route::controllers([

@@ -102,4 +102,11 @@ class PlaylistController extends Controller {
 		//
 	}
 
+    public function songs($id)
+    {
+        $playlist = Playlist::findOrFail($id);
+
+        return $playlist->songs->toArray();
+    }
+
 }

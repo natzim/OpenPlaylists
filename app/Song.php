@@ -19,6 +19,8 @@ class Song extends Model {
 
     public $timestamps = false;
 
+    protected $visible = ['url'];
+
     public function playlist()
     {
         return $this->belongsTo('App\Playlist');
