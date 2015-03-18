@@ -17,6 +17,11 @@ Route::get('home', 'HomeController@index');
 
 Route::get('playlists/{id}/songs', 'PlaylistController@songs');
 
+Route::get('playlists/{id}/fork', [
+    'uses' => 'PlaylistController@fork',
+    'as'   => 'playlists.fork'
+]);
+
 Route::resource('playlists', 'PlaylistController');
 
 Route::controllers([

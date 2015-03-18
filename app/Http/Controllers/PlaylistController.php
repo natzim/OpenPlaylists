@@ -45,7 +45,7 @@ class PlaylistController extends Controller {
 
         $playlist->save();
 
-        return redirect('/');
+        return redirect()->route('playlists.show', [$playlist]);
 	}
 
     /**
@@ -102,11 +102,48 @@ class PlaylistController extends Controller {
 		//
 	}
 
+    /**
+     * Gets the songs for the given playlist
+     *
+     * @param int $id Playlist ID
+     *
+     * @return array
+     */
     public function songs($id)
     {
         $playlist = Playlist::findOrFail($id);
 
         return $playlist->songs->toArray();
+    }
+
+    /**
+     * Forks a given playlist and associates it with the current user
+     *
+     * @param int $id Playlist ID
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function fork($id)
+    {
+        $forkedPlaylist = Playlist::findOrFail($id);
+
+        $playlist = $forkedPlaylist->replicate();
+
+        $playlist->forkParent()->associate($forkedPlaylist);
+        $playlist->user()->associate(Auth::user());
+
+        $playlist->save();
+
+        foreach ($forkedPlaylist->songs as $forkedSong)
+        {
+            $song = $forkedSong->replicate();
+
+            $song->playlist()->associate($playlist);
+
+            $song->save();
+        }
+
+        return redirect()->route('playlists.show', [$playlist]);
     }
 
 }
