@@ -12,15 +12,6 @@ function extractEmbeddableUrlFromHtml(html, site) {
         }
     }
 
-    switch(site) {
-        case 'YouTube':
-            url += '&autoplay=1';
-            break;
-        case 'SoundCloud':
-            url += '&auto_play=true';
-            break;
-    }
-
     return url;
 }
 
@@ -66,6 +57,7 @@ $(document).ready(function() {
                         '</div>'
                     );
                 }
+                $('#embed').attr('src', songs[0].url);
             });
         }
     });

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h1>{{ $playlist->name }}</h1>
-                @if(!is_null($playlist->forkParent))
+                @if (!is_null($playlist->forkParent))
                     <p class="text-muted">
                         <i class="fa fa-code-fork"></i>
                         Fork of <a href="{{ route('playlists.show', [$playlist->forkParent]) }}">
@@ -14,16 +14,15 @@
                         </a>
                     </p>
                 @endif
-                <p>
-                    <i class="fa fa-user"></i>
-                    Author: {{ $playlist->user->name }}
-                </p>
-                <a href="{{ route('playlists.fork', [$playlist]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
-                    <i class="fa fa-code-fork fa-lg"></i>
-                    <span class="sr-only">Fork this playlist</span>
-                </a>
+                @if (Auth::check())
+                    <p><i class="fa fa-user"></i> Author: {{ $playlist->user->name }}</p>
+                    <a href="{{ route('playlists.fork', [$playlist]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
+                        <i class="fa fa-code-fork fa-lg"></i>
+                        <span class="sr-only">Fork this playlist</span>
+                    </a>
+                @endif
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 well">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" id="embed"></iframe>
                 </div>
@@ -47,7 +46,7 @@
             </div>
         </div>
         <hr>
-        <div class="list-container"></div>
+        <div class="list-container row"></div>
     </div>
 </div>
 @stop
