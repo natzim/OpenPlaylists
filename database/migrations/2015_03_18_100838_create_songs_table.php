@@ -12,7 +12,7 @@ class CreateSongsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('songs', function($table)
+        Schema::create('songs', function(Blueprint $table)
         {
             $table->increments('id');
             $table->integer('playlist_id')->unsigned();

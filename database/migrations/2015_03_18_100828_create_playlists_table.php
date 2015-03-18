@@ -12,11 +12,11 @@ class CreatePlaylistsTable extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('playlists', function($table)
+        Schema::create('playlists', function(Blueprint $table)
         {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('forked_playlist_id')->unsigned();
+            $table->integer('fork_parent_id')->unsigned();
             $table->string('name', 100);
             $table->timestamps();
         });
