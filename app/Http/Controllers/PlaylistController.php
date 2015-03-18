@@ -8,21 +8,21 @@ use Illuminate\Http\Request;
 
 class PlaylistController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+    /**
+     * Display list of all playlists
+     *
+     * @return \Illuminate\View\View
+     */
 	public function index()
 	{
 		return view('playlists.index');
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+    /**
+     * Display form for creating new playlists
+     *
+     * @return \Illuminate\View\View
+     */
 	public function create()
 	{
 		return view('playlists.create');
@@ -38,12 +38,13 @@ class PlaylistController extends Controller {
 		//
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+    /**
+     * Show a playlist
+     *
+     * @param int $id Playlist ID
+     *
+     * @return \Illuminate\View\View
+     */
 	public function show($id)
 	{
         $playlist = Playlist::findOrFail($id);
@@ -53,12 +54,13 @@ class PlaylistController extends Controller {
         ]);
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+    /**
+     * Show form for editing a playlist
+     *
+     * @param int $id Playlist ID
+     *
+     * @return \Illuminate\View\View
+     */
 	public function edit($id)
 	{
         $playlist = Playlist::findOrFail($id);
