@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <h1>Playlists</h1>
+        <div class="page-header">
+            <h1>Playlists</h1>
+        </div>
         <form>
             <div class="form-group">
                 <label for="search">Search</label>

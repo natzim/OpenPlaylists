@@ -32,11 +32,16 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbar">
-            <a href="{{ route('playlists.create') }}" class="btn btn-success navbar-btn" data-toggle="tooltip"
-               data-placement="bottom" title="Create a new playlist">
-                <span class="sr-only">Create a new playlist</span>
-                <i class="fa fa-plus"></i>
-            </a>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="{{ route('playlists.index') }}" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-expanded="false">Playlists <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ route('playlists.index') }}">View</a></li>
+                        <li><a href="{{ route('playlists.create') }}">Create</a></li>
+                    </ul>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
                     <li><a href="{{ url('/auth/login') }}">Login</a></li>

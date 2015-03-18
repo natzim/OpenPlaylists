@@ -5,17 +5,18 @@
     <div class="row" data-playlist-id="{{ $playlist->id }}">
         <div class="row">
             <div class="col-md-6">
-                <h1>{{ $playlist->name }}</h1>
+                <div class="page-header">
+                    <h1>{{ $playlist->name }} <small>By {{ $playlist->user->name }}</small></h1>
+                </div>
                 @if (!is_null($playlist->forkParent))
                     <p class="text-muted">
                         <i class="fa fa-code-fork"></i>
                         Fork of <a href="{{ route('playlists.show', [$playlist->forkParent]) }}">
                             {{ $playlist->forkParent->name }}
-                        </a>
+                        </a> by {{ $playlist->forkParent->user->name }}
                     </p>
                 @endif
                 @if (Auth::check())
-                    <p><i class="fa fa-user"></i> Author: {{ $playlist->user->name }}</p>
                     <a href="{{ route('playlists.fork', [$playlist]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
                         <i class="fa fa-code-fork fa-lg"></i>
                         <span class="sr-only">Fork this playlist</span>

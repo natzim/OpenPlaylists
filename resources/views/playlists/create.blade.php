@@ -3,7 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h1>Create playlist</h1>
+            <div class="page-header">
+                <h1>Create playlist</h1>
+            </div>
             <form action="{{ route('playlists.store') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
