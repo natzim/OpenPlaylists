@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
+Route::get('/', function()
+{
+    return view('welcome');
+});
 
 Route::get('playlists/{id}/songs', 'PlaylistController@songs');
 
@@ -25,6 +26,6 @@ Route::get('playlists/{id}/fork', [
 Route::resource('playlists', 'PlaylistController');
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
+	'auth'     => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
