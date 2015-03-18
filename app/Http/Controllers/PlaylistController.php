@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Playlist;
 use App\Http\Requests\PlaylistRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller {
 
@@ -40,6 +41,7 @@ class PlaylistController extends Controller {
 		$playlist = new Playlist;
 
         $playlist->name = $request->input('name');
+        $playlist->user()->associate(Auth::user());
 
         $playlist->save();
 

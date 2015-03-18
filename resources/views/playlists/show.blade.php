@@ -12,6 +12,10 @@
                 </a>
             </p>
         @endif
+        <p>
+            <i class="fa fa-user"></i>
+            Author: {{ $playlist->user->name }}
+        </p>
         <a href="" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
             <i class="fa fa-code-fork"></i>
             <span class="sr-only">Fork this playlist</span>
