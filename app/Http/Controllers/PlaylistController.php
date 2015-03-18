@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Playlist;
 use App\Http\Requests\PlaylistRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class PlaylistController extends Controller {
 
@@ -27,8 +28,20 @@ class PlaylistController extends Controller {
      */
 	public function index()
 	{
+        Request::flash();
+
+        if (Request::has('search'))
+        {
+            $search = Request::input('search');
+            $playlists = Playlist::where('name', 'like', "%$search%")->paginate(15);
+        }
+        else
+        {
+            $playlists = Playlist::paginate(15);
+        }
+
 		return view('playlists.index', [
-            'playlists' => Playlist::all()
+            'playlists' => $playlists
         ]);
 	}
 
