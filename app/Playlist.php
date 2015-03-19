@@ -20,7 +20,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereUpdatedAt($value)
- * @property-read \App\User $author 
+ * @property-read \App\User $author
+ * @property integer $fork_parent_id 
+ * @property-read \App\User $user 
+ * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereForkParentId($value)
  */
 class Playlist extends Model {
 

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\User
@@ -23,7 +24,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Playlist[] $playlists 
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Playlist[] $playlists
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -34,6 +35,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['password', 'remember_token'];
 
     protected $fillable = ['name', 'email', 'password'];
+
+    public function owns($resource)
+    {
+        return $resource->user_id === Auth::id();
+    }
 
     public function playlists()
     {

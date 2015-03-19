@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Song whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Song wherePlaylistId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Song whereUrl($value)
+ * @property string $youtube_id 
+ * @method static \Illuminate\Database\Query\Builder|\App\Song whereYoutubeId($value)
  */
 class Song extends Model {
 
