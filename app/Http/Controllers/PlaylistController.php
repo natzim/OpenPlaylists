@@ -72,19 +72,19 @@ class PlaylistController extends Controller {
 
         $playlist->save();
 
-        return redirect()->route('playlists.show', [$playlist]);
+        return redirect()->route('playlists.show', $playlist->slug);
 	}
 
     /**
      * Show a playlist
      *
-     * @param int $id Playlist ID
+     * @param string $slug Playlist slug
      *
      * @return \Illuminate\View\View
      */
-	public function show($id)
+	public function show($slug)
 	{
-        $playlist = Playlist::findOrFail($id);
+        $playlist = Playlist::findBySlugOrFail($slug);
 
 		return view('playlists.show', [
             'playlist' => $playlist
@@ -94,32 +94,32 @@ class PlaylistController extends Controller {
     /**
      * Update a playlist
      *
-     * @param int             $id
+     * @param string          $slug    Playlist slug
      * @param PlaylistRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-	public function update($id, PlaylistRequest $request)
+	public function update($slug, PlaylistRequest $request)
 	{
-        $playlist = Playlist::findOrFail($id);
+        $playlist = Playlist::findBySlugOrFail($slug);
 
         $playlist->name = $request->input('name');
 
         $playlist->save();
 
-        return redirect()->route('playlists.show', [$playlist]);
+        return redirect()->route('playlists.show', $playlist->slug);
 	}
 
     /**
      * Delete a playlist
      *
-     * @param int $id
+     * @param string $slug Playlist slug
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-	public function destroy($id)
+	public function destroy($slug)
 	{
-        $playlist = Playlist::findOrFail($id);
+        $playlist = Playlist::findBySlugOrFail($slug);
 
         if (Auth::user()->owns($playlist))
         {
@@ -138,13 +138,13 @@ class PlaylistController extends Controller {
     /**
      * Get the songs for the given playlist
      *
-     * @param int $id Playlist ID
+     * @param string $slig Playlist slug
      *
      * @return array
      */
-    public function songs($id)
+    public function songs($slug)
     {
-        $playlist = Playlist::findOrFail($id);
+        $playlist = Playlist::findBySlugOrFail($slug);
 
         return $playlist->songs->toArray();
     }
@@ -152,15 +152,15 @@ class PlaylistController extends Controller {
     /**
      * Fork a given playlist and associate it with the current user
      *
-     * @param int $id Playlist ID
+     * @param string $slug Playlist slug
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function fork($id)
+    public function fork($slug)
     {
-        $forkedPlaylist = Playlist::findOrFail($id);
+        $forkedPlaylist = Playlist::findBySlugOrFail($slug);
 
-        $playlist = $forkedPlaylist->replicate();
+        $playlist = $forkedPlaylist->replicate()->resluggify();
 
         $playlist->forkParent()->associate($forkedPlaylist);
         $playlist->user()->associate(Auth::user());
@@ -176,7 +176,7 @@ class PlaylistController extends Controller {
             $song->save();
         }
 
-        return redirect()->route('playlists.show', [$playlist]);
+        return redirect()->route('playlists.show', $playlist->slug);
     }
 
 }

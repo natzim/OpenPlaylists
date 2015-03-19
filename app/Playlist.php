@@ -1,6 +1,9 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * App\Playlist
@@ -21,13 +24,29 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereUpdatedAt($value)
  * @property-read \App\User $author
- * @property integer $fork_parent_id 
- * @property-read \App\User $user 
+ * @property integer $fork_parent_id
+ * @property-read \App\User $user
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereForkParentId($value)
+ * @property string $slug 
+ * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereSlug($value)
  */
-class Playlist extends Model {
+class Playlist extends Model implements SluggableInterface {
+
+    use SluggableTrait;
 
 	protected $table = 'playlists';
+
+    protected $sluggable = [];
+
+    public static function findBySlugOrFail($slug)
+    {
+        if (!is_null($playlist = static::where('slug', $slug)->first()))
+        {
+            return $playlist;
+        }
+
+        throw new ModelNotFoundException;
+    }
 
     public function songs()
     {

@@ -18,11 +18,11 @@
         @if (!is_null($playlist->forkParent))
             <p class="text-muted">
                 <i class="fa fa-code-fork"></i>
-                Fork of <a href="{{ route('playlists.show', [$playlist->forkParent]) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
+                Fork of <a href="{{ route('playlists.show', $playlist->forkParent->slug) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
             </p>
         @endif
         @if (Auth::check())
-            <a href="{{ route('playlists.fork', [$playlist]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
+            <a href="{{ route('playlists.fork', $playlist->slug) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
                 <i class="fa fa-code-fork fa-lg"></i>
                 <span class="sr-only">Fork this playlist</span>
             </a>
@@ -80,7 +80,7 @@
                 <p>Are you sure you want to delete this playlist?</p>
             </div>
             <div class="modal-footer">
-                <form action="{{ route('playlists.destroy', [$playlist]) }}" method="post">
+                <form action="{{ route('playlists.destroy', $playlist->slug) }}" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button class="btn btn-danger">Yes, delete this playlist</button>

@@ -85,10 +85,8 @@ function onPlayerStateChange(event) {
 }
 
 $(document).ready(function() {
-    var playlistId = $('[data-playlist-id]').data('playlist-id');
-
     $.ajax({
-        url: '/playlists/' + playlistId + '/songs',
+        url: document.location + '/songs', // find a better way of doing this
         success: function(ids) {
             var requests = [];
 

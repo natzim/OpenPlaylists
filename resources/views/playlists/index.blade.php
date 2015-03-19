@@ -19,7 +19,7 @@
     <div class="list-group">
         @forelse ($playlists as $playlist)
             <div class="list-group-item">
-                <a href="{{ route('playlists.show', [$playlist]) }}">{{ $playlist->name }}</a>
+                <a href="{{ route('playlists.show', $playlist->slug) }}">{{ $playlist->name }}</a>
                 <span class="badge">{{ $playlist->songs->count() }}</span>
             </div>
         @empty
