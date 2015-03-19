@@ -4,23 +4,38 @@
 <div class="container" data-playlist-id="{{ $playlist->id }}">
     <div class="col-md-6">
         <div class="page-header">
-            <h1>{{ $playlist->name }} <small>By {{ $playlist->user->name }}</small></h1>
+            <h1>
+                {{ $playlist->name }}
+                <small class="pull-right">
+                    @if (Auth::user()->owns($playlist))
+                        <button class="btn">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    @endif
+                </small>
+            </h1>
         </div>
         @if (!is_null($playlist->forkParent))
             <p class="text-muted">
-            <i class="fa fa-code-fork"></i>
-            Fork of <a href="{{ route('playlists.show', [$playlist->forkParent]) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
-                </p>
+                <i class="fa fa-code-fork"></i>
+                Fork of <a href="{{ route('playlists.show', [$playlist->forkParent]) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
+            </p>
         @endif
         @if (Auth::check())
             <a href="{{ route('playlists.fork', [$playlist]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
                 <i class="fa fa-code-fork fa-lg"></i>
                 <span class="sr-only">Fork this playlist</span>
             </a>
+            @if (Auth::user()->owns($playlist))
+                <a href="{{ route('playlists.destroy', [$playlist]) }}" class="btn btn-danger pull-right" data-toggle="tooltip" data-placement="bottom" title="Delete this playlist">
+                    <i class="fa fa-trash"></i>
+                    <span class="sr-only">Delete this playlist</span>
+                </a>
+            @endif
             <hr>
         @endif
         <p class="text-muted">
-            Created {{ $playlist->created_at->diffForHumans() }}
+            Created {{ $playlist->created_at->diffForHumans() }} by {{ $playlist->user->name }}
         </p>
         @if ($playlist->updated_at > $playlist->created_at)
             <p class="text-muted">
