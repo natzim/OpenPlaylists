@@ -18,6 +18,7 @@ class CreatePlaylistsTable extends Migration {
             $table->integer('user_id')->unsigned();
             $table->integer('fork_parent_id')->unsigned();
             $table->string('name', 100);
+            $table->string('slug')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
