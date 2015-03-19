@@ -26,6 +26,6 @@
             <p class="lead">Sorry, we couldn't find any playlists!</p>
         @endforelse
     </div>
-    {{ $playlists->render() }}
+    {!! $playlists->render() !!}
 </div>
 @stop
