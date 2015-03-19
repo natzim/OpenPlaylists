@@ -20,6 +20,13 @@ class PlaylistController extends Controller {
                 'songs'
             ]
         ]);
+
+        $this->middleware('owns', [
+            'only' => [
+                'update',
+                'destroy'
+            ]
+        ]);
     }
 
     /**
@@ -121,18 +128,11 @@ class PlaylistController extends Controller {
 	{
         $playlist = Playlist::findBySlugOrFail($slug);
 
-        if (Auth::user()->owns($playlist))
-        {
-            $playlist->delete();
+        $playlist->delete();
 
-            Session::flash('message', 'Playlist successfully deleted!');
+        Session::flash('message', 'Playlist successfully deleted!');
 
-            return redirect()->route('playlists.index');
-        }
-        else
-        {
-            return response('Unauthorized.', 401);
-        }
+        return redirect()->route('playlists.index');
 	}
 
     /**
