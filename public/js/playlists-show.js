@@ -1,77 +1,112 @@
 var songs = [];
-var currentSong = null;
+var currentSong = 0;
+player;
+var playing = false;
 
-function extractEmbeddableUrlFromHtml(html, site) {
-    var segments = html.split(' ');
-    var url = '';
-    for (var j = 0; j < segments.length; j++) {
-        var segment = segments[j];
-        if (segment.substring(0, 5) === 'src="') {
-            url = segment.substring(5, segment.indexOf('"', 5));
-            break;
+function newSong(id, title) {
+    songs.push({
+        id: id,
+        title: title
+    });
+    $('.list-group').append(
+        '<a href="#" class="list-group-item" data-video-id="' + id + '">' + title + '</a>'
+    );
+}
+
+function loadYouTubeIframeAPI() {
+    var tag = document.createElement('script');
+
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        videoId: songs[0].id,
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
         }
-    }
+    });
+}
 
-    return url;
+function onPlayerReady(event) {
+
+}
+
+function previousSong() {
+    if (currentSong > 0) {
+        currentSong--;
+        player.loadVideoById(songs[currentSong].id);
+    }
+}
+
+function nextSong() {
+    if (currentSong < songs.length - 1) {
+        currentSong++;
+        player.loadVideoById(songs[currentSong].id);
+    }
+}
+
+$('#next').click(nextSong);
+$('#previous').click(previousSong);
+$('#play').click(function() {
+    if (playing) {
+        player.pauseVideo();
+    } else {
+        player.playVideo();
+    }
+});
+$(document).on('click', '[data-video-id]', function(e) {
+    e.preventDefault();
+    player.loadVideoById($(this).data('video-id'));
+});
+
+function onPlayerStateChange(event) {
+    switch (event.data) {
+        case YT.PlayerState.ENDED:
+            nextSong();
+            playing = false;
+            break;
+        case YT.PlayerState.PLAYING:
+            playing = true;
+            break;
+        case YT.PlayerState.PAUSED:
+            playing = false;
+            break;
+    }
+    $('[data-video-id]').removeClass('active');
+    $('[data-video-id=' + player.getVideoData().video_id + ']').addClass('active');
+    $('#play > i').attr('class', 'fa fa-' + (playing ? 'pause' : 'play'));
+
 }
 
 $(document).ready(function() {
     var playlistId = $('[data-playlist-id]').data('playlist-id');
 
     $.ajax({
-        url: playlistId + '/songs',
-        success: function(urls) {
+        url: '/playlists/' + playlistId + '/songs',
+        success: function(ids) {
             var requests = [];
 
-            for (var i = 0; i < urls.length; i++) {
-                var url = urls[i].url;
+            for (var i = 0; i < ids.length; i++) {
+                var id = ids[i].youtube_id;
 
                 requests.push($.ajax({
-                    url: 'http://noembed.com/embed?url=' + url,
+                    url: 'http://noembed.com/embed?url=https://www.youtube.com/watch?v=' + id,
+                    id: id,
                     dataType: 'json',
                     success: function(thing) {
-                        songs.push({
-                            url: extractEmbeddableUrlFromHtml(thing.html, thing.provider_name),
-                            title: thing.title,
-                            site: thing.provider_name
-                        });
+                        newSong(this.id, thing.title)
                     }
                 }));
             }
             $.when.apply(null, requests).done(function() {
-                for (var i = 0; i < songs.length; i++) {
-                    var song = songs[i];
-
-                    $('.list-container').append(
-                        '<div class="well well-sm">' +
-                        '<div class="row">' +
-                        '<div class="col-xs-1">' +
-                        '<button type="button" class="btn btn-block btn-default" data-song-index="' + i + '">' +
-                        '<i class="fa fa-play"></i>' +
-                        '</button>' +
-                        '</div>' +
-                        '<div class="col-xs-11">' +
-                        '<p>' + song.title + '</p>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>'
-                    );
-                }
-                $('#embed').attr('src', songs[0].url);
+                loadYouTubeIframeAPI();
             });
         }
     });
-});
-
-$(document).on('click', '[data-song-index]', function() {
-    var songIndex = $(this).data('song-index');
-
-    if (songIndex !== currentSong) {
-        $('#embed').attr('src', songs[songIndex].url);
-        currentSong = songIndex;
-        $(this).html('<i class="fa fa-pause"></i>');
-    } else {
-        // TODO: Pause music
-        $(this).html('<i class="fa fa-play"></i>');
-    }
 });

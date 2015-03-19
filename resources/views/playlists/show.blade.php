@@ -24,9 +24,7 @@
                 @endif
             </div>
             <div class="col-md-6 well">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" id="embed"></iframe>
-                </div>
+                <div id="player"></div>
                 <hr>
                 <div class="text-center">
                     <div class="btn-group btn-group-lg" role="group" aria-label="Playlist controls">
@@ -47,7 +45,7 @@
             </div>
         </div>
         <hr>
-        <div class="list-container row"></div>
+        <div class="list-group row"></div>
     </div>
 </div>
 @stop

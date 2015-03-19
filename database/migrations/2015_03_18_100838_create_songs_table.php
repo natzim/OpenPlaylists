@@ -16,7 +16,7 @@ class CreateSongsTable extends Migration {
         {
             $table->increments('id');
             $table->integer('playlist_id')->unsigned();
-            $table->string('url', 100);
+            $table->string('youtube_id', 11);
         });
     }
 

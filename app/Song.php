@@ -19,7 +19,7 @@ class Song extends Model {
 
     public $timestamps = false;
 
-    protected $visible = ['url'];
+    protected $visible = ['youtube_id'];
 
     public function playlist()
     {
