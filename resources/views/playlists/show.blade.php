@@ -27,10 +27,9 @@
                 <span class="sr-only">Fork this playlist</span>
             </a>
             @if (Auth::user()->owns($playlist))
-                <a href="{{ route('playlists.destroy', [$playlist]) }}" class="btn btn-danger pull-right" data-toggle="tooltip" data-placement="bottom" title="Delete this playlist">
+                <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#delete">
                     <i class="fa fa-trash"></i>
-                    <span class="sr-only">Delete this playlist</span>
-                </a>
+                </button>
             @endif
             <hr>
         @endif
@@ -68,6 +67,27 @@
     <div class="clearfix"></div>
     <hr>
     <div class="list-group"></div>
+</div>
+
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this playlist?</p>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('playlists.destroy', [$playlist]) }}" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button class="btn btn-danger">Yes, delete this playlist</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @stop
 

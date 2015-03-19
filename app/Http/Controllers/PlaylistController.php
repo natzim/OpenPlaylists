@@ -46,7 +46,7 @@ class PlaylistController extends Controller {
 	}
 
     /**
-     * Display form for creating new playlists
+     * Display form for creating a new playlist
      *
      * @return \Illuminate\View\View
      */
@@ -55,11 +55,13 @@ class PlaylistController extends Controller {
 		return view('playlists.create');
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
+    /**
+     * Create a new playlist
+     *
+     * @param PlaylistRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
 	public function store(PlaylistRequest $request)
 	{
 		$playlist = new Playlist;
@@ -89,45 +91,49 @@ class PlaylistController extends Controller {
 	}
 
     /**
-     * Show form for editing a playlist
+     * Update a playlist
      *
-     * @param int $id Playlist ID
+     * @param int             $id
+     * @param PlaylistRequest $request
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
-	public function edit($id)
+	public function update($id, PlaylistRequest $request)
 	{
         $playlist = Playlist::findOrFail($id);
 
-        return view('playlists.edit', [
-            'playlist' => $playlist
-        ]);
-	}
+        $playlist->name = $request->input('name');
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+        $playlist->save();
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+        return redirect()->route('playlists.show', [$playlist]);
 	}
 
     /**
-     * Gets the songs for the given playlist
+     * Delete a playlist
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+	public function destroy($id)
+	{
+        $playlist = Playlist::findOrFail($id);
+
+        if (Auth::user()->owns($playlist))
+        {
+            $playlist->delete();
+
+            return redirect()->route('playlists.index');
+        }
+        else
+        {
+            return response('Unauthorized.', 401);
+        }
+	}
+
+    /**
+     * Get the songs for the given playlist
      *
      * @param int $id Playlist ID
      *
