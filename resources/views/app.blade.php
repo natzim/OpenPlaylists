@@ -13,10 +13,6 @@
         :focus {
             outline: 0 !important;
         }
-
-        html {
-            overflow-y: scroll;
-        }
     </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
