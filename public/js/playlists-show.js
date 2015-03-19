@@ -1,6 +1,6 @@
 var songs = [];
 var currentSong = 0;
-player;
+var player;
 var playing = false;
 
 function newSong(id, title) {
