@@ -8,9 +8,9 @@
         </div>
         @if (!is_null($playlist->forkParent))
             <p class="text-muted">
-                <i class="fa fa-code-fork"></i>
-                Fork of <a href="{{ route('playlists.show', [$playlist->forkParent]) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
-            </p>
+            <i class="fa fa-code-fork"></i>
+            Fork of <a href="{{ route('playlists.show', [$playlist->forkParent]) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
+                </p>
         @endif
         @if (Auth::check())
             <a href="{{ route('playlists.fork', [$playlist]) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
@@ -18,6 +18,14 @@
                 <span class="sr-only">Fork this playlist</span>
             </a>
             <hr>
+        @endif
+        <p class="text-muted">
+            Created {{ $playlist->created_at->diffForHumans() }}
+        </p>
+        @if ($playlist->updated_at > $playlist->created_at)
+            <p class="text-muted">
+                Updated {{ $playlist->updated_at->diffForHumans() }}
+            </p>
         @endif
     </div>
     <div class="col-md-6 well">
