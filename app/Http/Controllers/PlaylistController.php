@@ -7,6 +7,7 @@ use App\Playlist;
 use App\Http\Requests\PlaylistRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 
 class PlaylistController extends Controller {
 
@@ -123,6 +124,8 @@ class PlaylistController extends Controller {
         if (Auth::user()->owns($playlist))
         {
             $playlist->delete();
+
+            Session::flash('message', 'Playlist successfully deleted!');
 
             return redirect()->route('playlists.index');
         }

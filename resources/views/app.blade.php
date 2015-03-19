@@ -65,6 +65,15 @@
     </div>
 </nav>
 
+<div class="container">
+    @if (Session::has('message'))
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ Session::get('message') }}
+        </div>
+    @endif
+</div>
+
 @yield('content')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
