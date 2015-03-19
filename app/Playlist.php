@@ -38,6 +38,13 @@ class Playlist extends Model implements SluggableInterface {
 
     protected $sluggable = [];
 
+    /**
+     * Gets a playlist by slug
+     *
+     * @param $slug
+     *
+     * @return \App\Playlist
+     */
     public static function findBySlugOrFail($slug)
     {
         if (!is_null($playlist = static::where('slug', $slug)->first()))

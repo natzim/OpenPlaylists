@@ -138,7 +138,7 @@ class PlaylistController extends Controller {
     /**
      * Get the songs for the given playlist
      *
-     * @param string $slig Playlist slug
+     * @param string $slug Playlist slug
      *
      * @return array
      */
