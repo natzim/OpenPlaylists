@@ -20,9 +20,9 @@ class UserTableSeeder extends Seeder {
         for ($i = 0; $i < 49; $i++)
         {
             User::create([
-                'name'     => $faker->name,
+                'name'     => $faker->userName,
                 'email'    => $faker->email,
-                'password' => bcrypt($faker->name)
+                'password' => bcrypt($faker->password)
             ]);
         }
     }
