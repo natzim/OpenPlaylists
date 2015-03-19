@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Playlist
@@ -27,12 +28,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @property integer $fork_parent_id
  * @property-read \App\User $user
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereForkParentId($value)
- * @property string $slug 
+ * @property string $slug
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereSlug($value)
  */
 class Playlist extends Model implements SluggableInterface {
 
     use SluggableTrait;
+    use SoftDeletes;
 
 	protected $table = 'playlists';
 

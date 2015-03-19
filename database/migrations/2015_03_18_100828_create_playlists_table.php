@@ -19,6 +19,7 @@ class CreatePlaylistsTable extends Migration {
             $table->integer('fork_parent_id')->unsigned();
             $table->string('name', 100);
             $table->timestamps();
+            $table->softDeletes();
         });
 	}
 
