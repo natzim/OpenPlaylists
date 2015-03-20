@@ -54,7 +54,7 @@
                     <span class="sr-only">Previous song</span>
                 </button>
                 <button type="button" class="btn btn-default" id="play">
-                    <i class="fa fa-play"></i>
+                    <i class="fa fa-play" id="play-icon"></i>
                     <span class="sr-only">Play/Pause song</span>
                 </button>
                 <button type="button" class="btn btn-default" id="next">
@@ -66,7 +66,11 @@
     </div>
     <div class="clearfix"></div>
     <hr>
-    <div class="list-group"></div>
+    <div class="list-group">
+        @foreach ($playlist->songs as $song)
+            <a href="#" class="list-group-item" data-video-id="{{ $song->youtube_id }}">{{ $song->name }}</a>
+        @endforeach
+    </div>
 </div>
 
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
@@ -93,4 +97,5 @@
 
 @section('scripts')
 <script src="/js/playlists-show.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 @stop

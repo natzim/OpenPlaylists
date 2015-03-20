@@ -1,110 +1,105 @@
-var songs = [];
-var currentSong = 0;
+// Stores the YouTube player object
 var player;
+// Array of YouTube video IDs
+var songs = [];
+// Is the song currently playing?
 var playing = false;
 
-function newSong(id, title) {
-    songs.push({
-        id: id,
-        title: title
+$(document).ready(function() {
+
+    // Get the YouTube video IDs and add them to the songs array
+    $('[data-video-id]').each(function() {
+         songs.push($(this).data('video-id'));
     });
-    $('.list-group').append(
-        '<a href="#" class="list-group-item" data-video-id="' + id + '">' + title + '</a>'
-    );
-}
-
-function loadYouTubeIframeAPI() {
-    var tag = document.createElement('script');
-
-    tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-}
-
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-        height: '100%',
-        width: '100%',
-        videoId: songs[0].id,
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-        }
-    });
-}
-
-function onPlayerReady(event) {
-
-}
-
-function previousSong() {
-    if (currentSong > 0) {
-        currentSong--;
-        player.loadVideoById(songs[currentSong].id);
-    }
-}
-
-function nextSong() {
-    if (currentSong < songs.length - 1) {
-        currentSong++;
-        player.loadVideoById(songs[currentSong].id);
-    }
-}
-
-$('#next').click(nextSong);
-$('#previous').click(previousSong);
-$('#play').click(function() {
-    if (playing) {
-        player.pauseVideo();
-    } else {
-        player.playVideo();
-    }
 });
+
+// When a song title is clicked in the list
 $(document).on('click', '[data-video-id]', function(e) {
     e.preventDefault();
     player.loadVideoById($(this).data('video-id'));
 });
 
+$('#play').click(togglePlay);
+$('#previous').click(previous);
+$('#next').click(next);
+
+// Toggle the play/pause state of the song
+function togglePlay() {
+    if (playing) {
+        player.pauseVideo();
+    } else {
+        player.playVideo();
+    }
+}
+
+// Play the previous song
+function previous() {
+    var currentSongIndex = songs.indexOf(player.getVideoData().video_id);
+
+    if (currentSongIndex > 0) {
+        player.loadVideoById(songs[currentSongIndex - 1]);
+    }
+}
+
+// Play the next song
+function next() {
+    var currentSongIndex = songs.indexOf(player.getVideoData().video_id);
+
+    if (currentSongIndex < songs.length - 1) {
+        player.loadVideoById(songs[currentSongIndex + 1]);
+    }
+}
+
+/**
+ * YouTube iFrame API
+ */
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+
+        // Responsive iFrame
+        height: '100%',
+        width: '100%',
+
+        // Load the first song
+        videoId: songs[0],
+        events: {
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
 function onPlayerStateChange(event) {
     switch (event.data) {
+
         case YT.PlayerState.ENDED:
-            nextSong();
+
+            // Video has ended, so play next song
+            next();
             playing = false;
             break;
+
         case YT.PlayerState.PLAYING:
+
+            // Video is playing
             playing = true;
             break;
+
         case YT.PlayerState.PAUSED:
+
+            // Video is paused
             playing = false;
             break;
     }
+
+    // Make all songs inactive, then activate the current video
     $('[data-video-id]').removeClass('active');
-    $('[data-video-id=' + player.getVideoData().video_id + ']').addClass('active');
-    $('#play > i').attr('class', 'fa fa-' + (playing ? 'pause' : 'play'));
 
+    // Check that method exists so when it goes to the next song it does not throw an error
+    if (typeof player.getVideoData() !== 'undefined') {
+        $('[data-video-id=' + player.getVideoData().video_id + ']').addClass('active');
+    }
+
+    // Change play button
+    $('#play-icon').attr('class', 'fa fa-' + (playing ? 'pause' : 'play'));
 }
-
-$(document).ready(function() {
-    $.ajax({
-        url: document.location + '/songs', // find a better way of doing this
-        success: function(ids) {
-            var requests = [];
-
-            for (var i = 0; i < ids.length; i++) {
-                var id = ids[i].youtube_id;
-
-                requests.push($.ajax({
-                    url: 'http://noembed.com/embed?url=https://www.youtube.com/watch?v=' + id,
-                    id: id,
-                    dataType: 'json',
-                    success: function(thing) {
-                        newSong(this.id, thing.title)
-                    }
-                }));
-            }
-            $.when.apply(null, requests).done(function() {
-                loadYouTubeIframeAPI();
-            });
-        }
-    });
-});

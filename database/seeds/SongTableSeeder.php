@@ -31,6 +31,7 @@ class SongTableSeeder extends Seeder {
         for ($i = 0; $i < 1000; $i++)
         {
             Song::create([
+                'name'        => 'Artist - Title',
                 'playlist_id' => $faker->numberBetween($min = 1, $max = 200),
                 'youtube_id'  => $ids[array_rand($ids)]
             ]);
