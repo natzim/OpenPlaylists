@@ -7,7 +7,7 @@
             <h1>
                 {{ $playlist->name }}
                 <small class="pull-right">
-                    @if (Auth::user()->owns($playlist))
+                    @if (Auth::check() && Auth::user()->owns($playlist))
                         <button class="btn">
                             <i class="fa fa-pencil"></i>
                         </button>
