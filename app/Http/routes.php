@@ -12,7 +12,11 @@ Route::get('playlists/{id}/fork', [
     'as'   => 'playlists.fork'
 ]);
 
-Route::resource('playlists', 'PlaylistController');
+Route::resource('playlists', 'PlaylistController', [
+    'except' => [
+        'edit'
+    ]
+]);
 
 Route::controllers([
 	'auth'     => 'Auth\AuthController',
