@@ -3,7 +3,6 @@
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -30,6 +29,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereForkParentId($value)
  * @property string $slug
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereSlug($value)
+ * @property string $deleted_at
+ * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereDeletedAt($value)
  */
 class Playlist extends Model implements SluggableInterface {
 
@@ -41,7 +42,7 @@ class Playlist extends Model implements SluggableInterface {
     protected $sluggable = [];
 
     /**
-     * Gets a playlist by slug
+     * Get a playlist from slug
      *
      * @param $slug
      *
@@ -49,12 +50,7 @@ class Playlist extends Model implements SluggableInterface {
      */
     public static function findBySlugOrFail($slug)
     {
-        if (!is_null($playlist = static::where('slug', $slug)->first()))
-        {
-            return $playlist;
-        }
-
-        throw new ModelNotFoundException;
+        return static::where('slug', $slug)->firstOrFail();
     }
 
     public function songs()
