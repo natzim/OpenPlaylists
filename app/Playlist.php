@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereSlug($value)
  * @property string                                                        $deleted_at
  * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereDeletedAt($value)
+ * @method static \App\Playlist findBySlugOrFail($slug)
  */
 class Playlist extends Model implements SluggableInterface {
 
@@ -43,13 +44,14 @@ class Playlist extends Model implements SluggableInterface {
     /**
      * Get a playlist from slug
      *
+     * @param $query
      * @param $slug
      *
      * @return \App\Playlist
      */
-    public static function findBySlugOrFail($slug)
+    public function scopeFindBySlugOrFail($query, $slug)
     {
-        return static::where('slug', $slug)
+        return $query->where('slug', $slug)
                      ->firstOrFail();
     }
 

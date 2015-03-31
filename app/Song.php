@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Song
+ *
  * @property-read \App\Playlist $playlist
  * @property integer            $id
  * @property integer            $playlist_id

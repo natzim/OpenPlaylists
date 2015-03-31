@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * App\User
+ *
  * @property integer                                                       $id
  * @property string                                                        $name
  * @property string                                                        $email

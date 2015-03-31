@@ -103,8 +103,7 @@ class PlaylistController extends Controller {
     {
         $playlist = Auth::user()
                         ->playlists()
-                        ->where('slug', $slug)
-                        ->firstOrFail();
+                        ->findBySlugOrFail($slug);
 
         $playlist->name = $request->input('name');
 
@@ -124,8 +123,7 @@ class PlaylistController extends Controller {
     {
         $playlist = Auth::user()
                         ->playlists()
-                        ->where('slug', $slug)
-                        ->firstOrFail();
+                        ->findBySlugOrFail($slug);
 
         $playlist->delete();
 
