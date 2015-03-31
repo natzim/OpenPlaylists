@@ -34,8 +34,7 @@ class PlaylistController extends Controller {
         if (Request::has('search'))
         {
             $search = Request::input('search');
-            $playlists = Playlist::where('name', 'like', "%$search%")
-                ->paginate(15);
+            $playlists = Playlist::where('name', 'like', "%$search%")->paginate(15);
         }
         else
         {
@@ -69,8 +68,7 @@ class PlaylistController extends Controller {
         $playlist = new Playlist;
 
         $playlist->name = $request->input('name');
-        $playlist->user()
-            ->associate(Auth::user());
+        $playlist->user()->associate(Auth::user());
 
         $playlist->save();
 
@@ -86,7 +84,7 @@ class PlaylistController extends Controller {
      */
     public function show($slug)
     {
-        $playlist = Playlist::findBySlugOrFail($slug);
+        $playlist = Playlist::with('songs', 'forkParent')->findBySlugOrFail($slug);
 
         return view('playlists.show', [
             'playlist' => $playlist
@@ -143,7 +141,7 @@ class PlaylistController extends Controller {
      */
     public function songs($slug)
     {
-        $playlist = Playlist::findBySlugOrFail($slug);
+        $playlist = Playlist::with('songs')->findBySlugOrFail($slug);
 
         return $playlist->songs->toArray();
     }
@@ -157,7 +155,7 @@ class PlaylistController extends Controller {
      */
     public function fork($slug)
     {
-        $forkedPlaylist = Playlist::findBySlugOrFail($slug);
+        $forkedPlaylist = Playlist::with('songs')->findBySlugOrFail($slug);
 
         $playlist = $forkedPlaylist->replicate();
 
