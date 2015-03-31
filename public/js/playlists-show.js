@@ -5,16 +5,16 @@ var songs = [];
 // Is the song currently playing?
 var playing = false;
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     // Get the YouTube video IDs and add them to the songs array
-    $('[data-video-id]').each(function() {
-         songs.push($(this).data('video-id'));
+    $('[data-video-id]').each(function () {
+        songs.push($(this).data('video-id'));
     });
 });
 
 // When a song title is clicked in the list
-$(document).on('click', '[data-video-id]', function(e) {
+$(document).on('click', '[data-video-id]', function (e) {
     e.preventDefault();
     player.loadVideoById($(this).data('video-id'));
 });

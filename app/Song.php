@@ -4,22 +4,21 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Song
- *
  * @property-read \App\Playlist $playlist
- * @property integer $id
- * @property integer $playlist_id
- * @property string $url
+ * @property integer            $id
+ * @property integer            $playlist_id
+ * @property string             $url
  * @method static \Illuminate\Database\Query\Builder|\App\Song whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Song wherePlaylistId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Song whereUrl($value)
- * @property string $youtube_id
+ * @property string             $youtube_id
  * @method static \Illuminate\Database\Query\Builder|\App\Song whereYoutubeId($value)
- * @property string $name
+ * @property string             $name
  * @method static \Illuminate\Database\Query\Builder|\App\Song whereName($value)
  */
 class Song extends Model {
 
-	protected $table = 'songs';
+    protected $table = 'songs';
 
     public $timestamps = false;
 

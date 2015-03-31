@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', function()
+Route::get('/', function ()
 {
     return view('welcome');
 });
@@ -19,6 +19,6 @@ Route::resource('playlists', 'PlaylistController', [
 ]);
 
 Route::controllers([
-	'auth'     => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth'     => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
