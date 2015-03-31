@@ -20,13 +20,6 @@ class PlaylistController extends Controller {
                 'songs'
             ]
         ]);
-
-        $this->middleware('owns', [
-            'only' => [
-                'update',
-                'destroy'
-            ]
-        ]);
     }
 
     /**
@@ -108,7 +101,7 @@ class PlaylistController extends Controller {
      */
 	public function update($slug, PlaylistRequest $request)
 	{
-        $playlist = Playlist::findBySlugOrFail($slug);
+        $playlist = Auth::user()->playlists()->where('slug', $slug)->firstOrFail();
 
         $playlist->name = $request->input('name');
 
@@ -122,11 +115,11 @@ class PlaylistController extends Controller {
      *
      * @param string $slug Playlist slug
      *
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
 	public function destroy($slug)
 	{
-        $playlist = Playlist::findBySlugOrFail($slug);
+        $playlist = Auth::user()->playlists()->where('slug', $slug)->firstOrFail();
 
         $playlist->delete();
 
