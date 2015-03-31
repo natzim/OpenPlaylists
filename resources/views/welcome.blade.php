@@ -34,7 +34,7 @@
                 <p class="lead">Just paste a link to the music. No complicated formatting.</p>
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="http://lorempixel.com/600/400/technics/1">
+                <img class="img-responsive" src="http://lorempixel.com/g/600/400/technics/1">
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
                 <p class="lead">Mobile, tablet and desktop!</p>
             </div>
             <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                <img class="img-responsive" src="http://lorempixel.com/600/400/technics/2">
+                <img class="img-responsive" src="http://lorempixel.com/g/600/400/technics/2">
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
                 <p>Talking about openness, our full source code is <a target="_blank" href="https://github.com/natzim/OpenPlaylists">available on GitHub</a>.</p>
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="http://lorempixel.com/600/400/technics/3">
+                <img class="img-responsive" src="http://lorempixel.com/g/600/400/technics/3">
             </div>
         </div>
     </div>
