@@ -1,10 +1,10 @@
-@extends('app')
+@extends('fluid')
 
 @section('styles')
-<link rel="stylesheet" href="/css/welcome.css">
+    <link rel="stylesheet" href="/css/welcome.css">
 @stop
 
-@section('content')
+@section('stuff')
     <div class="intro-header">
         <div class="container">
             <div class="row">

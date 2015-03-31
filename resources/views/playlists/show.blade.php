@@ -5,78 +5,76 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
 ?>
 
 @section('content')
-    <div class="container" data-playlist-id="{{ $playlist->id }}">
-        <div class="col-md-6">
-            <div class="page-header">
-                <h1>
-                    {{ $playlist->name }}
-                    <small class="pull-right">
-                        @if ($owns)
-                            <button class="btn" data-toggle="modal" data-target="#edit">
-                                <i class="fa fa-pencil"></i>
-                                <span class="sr-only">Edit this playlist</span>
-                            </button>
-                        @endif
-                    </small>
-                </h1>
-            </div>
-            @if ($playlist->isFork())
-                <p class="text-muted">
-                    <i class="fa fa-code-fork"></i>
-                    Fork of <a href="{{ route('playlists.show', $playlist->forkParent->slug) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
-                </p>
-            @endif
-            @if (Auth::check())
-                <a href="{{ route('playlists.fork', $playlist->slug) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
-                    <i class="fa fa-code-fork fa-lg"></i>
-                    <span class="sr-only">Fork this playlist</span>
-                </a>
-                @if ($owns)
-                    <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#delete">
-                        <i class="fa fa-trash"></i>
-                        <span class="sr-only">Delete this playlist</span>
-                    </button>
-                @endif
-                <hr>
-            @endif
+    <div class="col-md-6">
+        <div class="page-header">
+            <h1>
+                {{ $playlist->name }}
+                <small class="pull-right">
+                    @if ($owns)
+                        <button class="btn" data-toggle="modal" data-target="#edit">
+                            <i class="fa fa-pencil"></i>
+                            <span class="sr-only">Edit this playlist</span>
+                        </button>
+                    @endif
+                </small>
+            </h1>
+        </div>
+        @if ($playlist->isFork())
             <p class="text-muted">
-                Created {{ $playlist->created_at->diffForHumans() }} by {{ $playlist->user->name }}
+                <i class="fa fa-code-fork"></i>
+                Fork of <a href="{{ route('playlists.show', $playlist->forkParent->slug) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
             </p>
-            @if ($playlist->hasBeenUpdated())
-                <p class="text-muted">
-                    Updated {{ $playlist->updated_at->diffForHumans() }}
-                </p>
+        @endif
+        @if (Auth::check())
+            <a href="{{ route('playlists.fork', $playlist->slug) }}" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Fork this playlist">
+                <i class="fa fa-code-fork fa-lg"></i>
+                <span class="sr-only">Fork this playlist</span>
+            </a>
+            @if ($owns)
+                <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#delete">
+                    <i class="fa fa-trash"></i>
+                    <span class="sr-only">Delete this playlist</span>
+                </button>
             @endif
-        </div>
-        <div class="col-md-6 well">
-            <div class="embed-responsive embed-responsive-16by9">
-                <div id="player"></div>
-            </div>
             <hr>
-            <div class="text-center">
-                <div class="btn-group btn-group-lg" role="group" aria-label="Playlist controls">
-                    <button type="button" class="btn btn-default" id="previous">
-                        <i class="fa fa-fast-backward"></i>
-                        <span class="sr-only">Previous song</span>
-                    </button>
-                    <button type="button" class="btn btn-default" id="play">
-                        <i class="fa fa-play" id="play-icon"></i>
-                        <span class="sr-only">Play/Pause song</span>
-                    </button>
-                    <button type="button" class="btn btn-default" id="next">
-                        <i class="fa fa-fast-forward"></i>
-                        <span class="sr-only">Next song</span>
-                    </button>
-                </div>
+        @endif
+        <p class="text-muted">
+            Created {{ $playlist->created_at->diffForHumans() }} by {{ $playlist->user->name }}
+        </p>
+        @if ($playlist->hasBeenUpdated())
+            <p class="text-muted">
+                Updated {{ $playlist->updated_at->diffForHumans() }}
+            </p>
+        @endif
+    </div>
+    <div class="col-md-6 well">
+        <div class="embed-responsive embed-responsive-16by9">
+            <div id="player"></div>
+        </div>
+        <hr>
+        <div class="text-center">
+            <div class="btn-group btn-group-lg" role="group" aria-label="Playlist controls">
+                <button type="button" class="btn btn-default" id="previous">
+                    <i class="fa fa-fast-backward"></i>
+                    <span class="sr-only">Previous song</span>
+                </button>
+                <button type="button" class="btn btn-default" id="play">
+                    <i class="fa fa-play" id="play-icon"></i>
+                    <span class="sr-only">Play/Pause song</span>
+                </button>
+                <button type="button" class="btn btn-default" id="next">
+                    <i class="fa fa-fast-forward"></i>
+                    <span class="sr-only">Next song</span>
+                </button>
             </div>
         </div>
-        <div class="clearfix"></div>
-        <hr>
-        <div class="list-group">
-            @foreach ($playlist->songs as $song)
-                <a href="#" class="list-group-item" data-video-id="{{ $song->youtube_id }}">{{ $song->name }}</a>
-            @endforeach
-        </div>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+    <div class="list-group">
+        @foreach ($playlist->songs as $song)
+            <a href="#" class="list-group-item" data-video-id="{{ $song->youtube_id }}">{{ $song->name }}</a>
+        @endforeach
     </div>
 
     @if ($owns)
