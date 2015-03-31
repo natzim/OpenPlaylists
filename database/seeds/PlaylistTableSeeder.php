@@ -7,8 +7,7 @@ class PlaylistTableSeeder extends Seeder {
 
     public function run()
     {
-        DB::table('playlists')
-            ->truncate();
+        DB::table('playlists')->truncate();
 
         $faker = Faker\Factory::create();
 
@@ -16,7 +15,7 @@ class PlaylistTableSeeder extends Seeder {
         {
             Playlist::create([
                 'name'    => $faker->catchPhrase,
-                'user_id' => $faker->numberBetween($min = 1, $max = 50)
+                'user_id' => rand(1, 50)
             ]);
         }
     }

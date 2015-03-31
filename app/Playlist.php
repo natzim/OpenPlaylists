@@ -78,7 +78,7 @@ class Playlist extends Model implements SluggableInterface {
 
     public function songs()
     {
-        return $this->hasMany('App\Song');
+        return $this->belongsToMany('App\Song');
     }
 
     public function forkParent()

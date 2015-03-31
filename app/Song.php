@@ -25,9 +25,9 @@ class Song extends Model {
 
     protected $visible = ['youtube_id'];
 
-    public function playlist()
+    public function playlists()
     {
-        return $this->belongsTo('App\Playlist');
+        return $this->belongsToMany('App\Playlist');
     }
 
 }

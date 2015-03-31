@@ -159,13 +159,13 @@ class PlaylistController extends Controller {
     {
         $forkedPlaylist = Playlist::findBySlugOrFail($slug);
 
-        $playlist = $forkedPlaylist->replicate()
-            ->resluggify();
+        $playlist = $forkedPlaylist->replicate();
 
-        $playlist->forkParent()
-            ->associate($forkedPlaylist);
-        $playlist->user()
-            ->associate(Auth::user());
+        $playlist->forkParent()->associate($forkedPlaylist);
+        $playlist->user()->associate(Auth::user());
+
+        // Generate a new slug for the playlist to avoid duplicates
+        $playlist->resluggify();
 
         $playlist->save();
 
@@ -173,8 +173,7 @@ class PlaylistController extends Controller {
         {
             $song = $forkedSong->replicate();
 
-            $song->playlist()
-                ->associate($playlist);
+            $song->playlist()->associate($playlist);
 
             $song->save();
         }
