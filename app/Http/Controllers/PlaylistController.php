@@ -135,20 +135,6 @@ class PlaylistController extends Controller {
     }
 
     /**
-     * Get the songs for the given playlist
-     *
-     * @param string $slug Playlist slug
-     *
-     * @return array
-     */
-    public function songs($slug)
-    {
-        $playlist = Playlist::with('songs')->findBySlugOrFail($slug);
-
-        return $playlist->songs->toArray();
-    }
-
-    /**
      * Fork a given playlist and associate it with the current user
      *
      * @param string $slug Playlist slug
