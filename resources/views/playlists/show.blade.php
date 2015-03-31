@@ -8,8 +8,9 @@
                 {{ $playlist->name }}
                 <small class="pull-right">
                     @if (Auth::check() && Auth::user()->owns($playlist))
-                        <button class="btn">
+                        <button class="btn" data-toggle="modal" data-target="#edit">
                             <i class="fa fa-pencil"></i>
+                            <span class="sr-only">Edit this playlist</span>
                         </button>
                     @endif
                 </small>
@@ -29,6 +30,7 @@
             @if (Auth::user()->owns($playlist))
                 <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#delete">
                     <i class="fa fa-trash"></i>
+                    <span class="sr-only">Delete this playlist</span>
                 </button>
             @endif
             <hr>
@@ -88,6 +90,28 @@
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button class="btn btn-danger">Yes, delete this playlist</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('playlists.update', $playlist->slug) }}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="put">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" id="name">
+                    </div>
+                    <button class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

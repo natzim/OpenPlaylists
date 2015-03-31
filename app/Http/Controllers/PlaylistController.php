@@ -107,6 +107,8 @@ class PlaylistController extends Controller {
 
         $playlist->name = $request->input('name');
 
+        $playlist->resluggify();
+
         $playlist->save();
 
         return redirect()->route('playlists.show', $playlist->slug);
