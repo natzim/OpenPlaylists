@@ -10,7 +10,7 @@ class UserTableSeeder extends Seeder {
         DB::table('users')->truncate();
 
         User::create([
-            'name'     => 'Admin',
+            'name'     => 'admin',
             'email'    => 'admin@example.com',
             'password' => bcrypt('password')
         ]);
@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder {
         for ($i = 0; $i < 49; $i++)
         {
             User::create([
-                'name'     => $faker->userName,
+                'name'     => str_replace('.', '-', $faker->userName),
                 'email'    => $faker->email,
                 'password' => bcrypt($faker->password)
             ]);
