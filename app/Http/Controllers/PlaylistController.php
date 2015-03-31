@@ -24,6 +24,7 @@ class PlaylistController extends Controller {
 
     /**
      * Display list of all playlists
+     *
      * @return \Illuminate\View\View
      */
     public function index()
@@ -34,7 +35,7 @@ class PlaylistController extends Controller {
         {
             $search = Request::input('search');
             $playlists = Playlist::where('name', 'like', "%$search%")
-                                 ->paginate(15);
+                ->paginate(15);
         }
         else
         {
@@ -48,6 +49,7 @@ class PlaylistController extends Controller {
 
     /**
      * Display form for creating a new playlist
+     *
      * @return \Illuminate\View\View
      */
     public function create()
@@ -68,7 +70,7 @@ class PlaylistController extends Controller {
 
         $playlist->name = $request->input('name');
         $playlist->user()
-                 ->associate(Auth::user());
+            ->associate(Auth::user());
 
         $playlist->save();
 
@@ -102,8 +104,8 @@ class PlaylistController extends Controller {
     public function update($slug, PlaylistRequest $request)
     {
         $playlist = Auth::user()
-                        ->playlists()
-                        ->findBySlugOrFail($slug);
+            ->playlists()
+            ->findBySlugOrFail($slug);
 
         $playlist->name = $request->input('name');
 
@@ -122,8 +124,8 @@ class PlaylistController extends Controller {
     public function destroy($slug)
     {
         $playlist = Auth::user()
-                        ->playlists()
-                        ->findBySlugOrFail($slug);
+            ->playlists()
+            ->findBySlugOrFail($slug);
 
         $playlist->delete();
 
@@ -158,12 +160,12 @@ class PlaylistController extends Controller {
         $forkedPlaylist = Playlist::findBySlugOrFail($slug);
 
         $playlist = $forkedPlaylist->replicate()
-                                   ->resluggify();
+            ->resluggify();
 
         $playlist->forkParent()
-                 ->associate($forkedPlaylist);
+            ->associate($forkedPlaylist);
         $playlist->user()
-                 ->associate(Auth::user());
+            ->associate(Auth::user());
 
         $playlist->save();
 
@@ -172,7 +174,7 @@ class PlaylistController extends Controller {
             $song = $forkedSong->replicate();
 
             $song->playlist()
-                 ->associate($playlist);
+                ->associate($playlist);
 
             $song->save();
         }

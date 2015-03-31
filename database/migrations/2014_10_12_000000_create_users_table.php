@@ -7,6 +7,7 @@ class CreateUsersTable extends Migration {
 
     /**
      * Run the migrations.
+     *
      * @return void
      */
     public function up()
@@ -15,9 +16,9 @@ class CreateUsersTable extends Migration {
         {
             $table->increments('id');
             $table->string('name', 20)
-                  ->unique();
+                ->unique();
             $table->string('email')
-                  ->unique();
+                ->unique();
             $table->string('password', 60);
             $table->rememberToken();
             $table->timestamps();
@@ -26,6 +27,7 @@ class CreateUsersTable extends Migration {
 
     /**
      * Reverse the migrations.
+     *
      * @return void
      */
     public function down()

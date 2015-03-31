@@ -8,6 +8,7 @@ class RedirectIfAuthenticated {
 
     /**
      * The Guard implementation.
+     *
      * @var Guard
      */
     protected $auth;

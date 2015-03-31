@@ -8,7 +8,7 @@ class PlaylistTableSeeder extends Seeder {
     public function run()
     {
         DB::table('playlists')
-          ->truncate();
+            ->truncate();
 
         $faker = Faker\Factory::create();
 

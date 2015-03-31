@@ -7,6 +7,7 @@ class CreateSongsTable extends Migration {
 
     /**
      * Run the migrations.
+     *
      * @return void
      */
     public function up()
@@ -16,13 +17,14 @@ class CreateSongsTable extends Migration {
             $table->increments('id');
             $table->string('name', 100); // YouTube video titles are limited to 100 characters
             $table->integer('playlist_id')
-                  ->unsigned();
+                ->unsigned();
             $table->string('youtube_id', 11); // YouTube IDs are 11 characters long
         });
     }
 
     /**
      * Reverse the migrations.
+     *
      * @return void
      */
     public function down()

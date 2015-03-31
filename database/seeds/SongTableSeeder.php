@@ -8,7 +8,7 @@ class SongTableSeeder extends Seeder {
     public function run()
     {
         DB::table('songs')
-          ->truncate();
+            ->truncate();
 
         $faker = Faker\Factory::create();
 

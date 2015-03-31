@@ -7,6 +7,7 @@ class CreatePlaylistsTable extends Migration {
 
     /**
      * Run the migrations.
+     *
      * @return void
      */
     public function up()
@@ -15,12 +16,12 @@ class CreatePlaylistsTable extends Migration {
         {
             $table->increments('id');
             $table->integer('user_id')
-                  ->unsigned();
+                ->unsigned();
             $table->integer('fork_parent_id')
-                  ->unsigned();
+                ->unsigned();
             $table->string('name', 100);
             $table->string('slug')
-                  ->nullable();
+                ->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +29,7 @@ class CreatePlaylistsTable extends Migration {
 
     /**
      * Reverse the migrations.
+     *
      * @return void
      */
     public function down()

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Playlist
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Song[]     $songs
  * @property-read \App\Playlist                                            $forkParent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Playlist[] $forks
@@ -52,11 +53,12 @@ class Playlist extends Model implements SluggableInterface {
     public function scopeFindBySlugOrFail($query, $slug)
     {
         return $query->where('slug', $slug)
-                     ->firstOrFail();
+            ->firstOrFail();
     }
 
     /**
      * Is the playlist a fork of another playlist?
+     *
      * @return bool
      */
     public function isFork()
@@ -66,6 +68,7 @@ class Playlist extends Model implements SluggableInterface {
 
     /**
      * Has the playlist been updated?
+     *
      * @return bool
      */
     public function hasBeenUpdated()

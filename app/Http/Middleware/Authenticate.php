@@ -7,6 +7,7 @@ class Authenticate {
 
     /**
      * The Guard implementation.
+     *
      * @var Guard
      */
     protected $auth;
