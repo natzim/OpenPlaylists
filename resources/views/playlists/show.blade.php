@@ -15,7 +15,7 @@
                 </small>
             </h1>
         </div>
-        @if (!is_null($playlist->forkParent))
+        @if ($playlist->isFork())
             <p class="text-muted">
                 <i class="fa fa-code-fork"></i>
                 Fork of <a href="{{ route('playlists.show', $playlist->forkParent->slug) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
@@ -36,7 +36,7 @@
         <p class="text-muted">
             Created {{ $playlist->created_at->diffForHumans() }} by {{ $playlist->user->name }}
         </p>
-        @if ($playlist->updated_at > $playlist->created_at)
+        @if ($playlist->hasBeenUpdated())
             <p class="text-muted">
                 Updated {{ $playlist->updated_at->diffForHumans() }}
             </p>

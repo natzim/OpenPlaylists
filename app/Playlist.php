@@ -53,6 +53,26 @@ class Playlist extends Model implements SluggableInterface {
         return static::where('slug', $slug)->firstOrFail();
     }
 
+    /**
+     * Is the playlist a fork of another playlist?
+     *
+     * @return bool
+     */
+    public function isFork()
+    {
+        return !is_null($this->forkParent);
+    }
+
+    /**
+     * Has the playlist been updated?
+     *
+     * @return bool
+     */
+    public function hasBeenUpdated()
+    {
+        return $this->updated_at > $this->created_at;
+    }
+
     public function songs()
     {
         return $this->hasMany('App\Song');
