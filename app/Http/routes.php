@@ -5,7 +5,7 @@ Route::get('/', function ()
     return view('welcome');
 });
 
-Route::post('playlists/{id}/fork', [
+Route::post('playlists/{slug}/fork', [
     'uses' => 'PlaylistController@fork',
     'as'   => 'playlists.fork'
 ]);
