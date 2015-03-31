@@ -169,13 +169,10 @@ class PlaylistController extends Controller {
 
         $playlist->save();
 
-        foreach ($forkedPlaylist->songs as $forkedSong)
+        // Replicate songs after playlist saved to allow for foreign key in pivot table
+        foreach ($forkedPlaylist->songs as $song)
         {
-            $song = $forkedSong->replicate();
-
-            $song->playlist()->associate($playlist);
-
-            $song->save();
+            $playlist->songs()->save($song);
         }
 
         return redirect()->route('playlists.show', $playlist->slug);
