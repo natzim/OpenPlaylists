@@ -34,15 +34,15 @@ class PlaylistController extends Controller {
         if (Request::has('search'))
         {
             $search = Request::input('search');
-            $playlists = Playlist::where('name', 'like', "%$search%")->paginate(15);
+            $playlists = Playlist::with('songs')->where('name', 'like', "%$search%");
         }
         else
         {
-            $playlists = Playlist::paginate(15);
+            $playlists = Playlist::with('songs');
         }
 
         return view('playlists.index', [
-            'playlists' => $playlists
+            'playlists' => $playlists->paginate(15)
         ]);
     }
 
