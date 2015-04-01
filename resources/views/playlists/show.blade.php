@@ -123,13 +123,13 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">Edit</h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-footer">
                         <form action="{{ route('playlists.update', $playlist->slug) }}" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="_method" value="put">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" name="name" id="name">
+                                <input type="text" class="form-control" name="name" id="name" maxlength="100">
                             </div>
                             <button class="btn btn-primary">Update</button>
                         </form>
