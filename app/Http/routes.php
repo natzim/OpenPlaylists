@@ -16,6 +16,11 @@ Route::resource('playlists', 'PlaylistController', [
     ]
 ]);
 
+Route::get('user/{name}', [
+    'uses' => 'ProfileController@show',
+    'as'   => 'users.show'
+]);
+
 Route::controllers([
     'auth'     => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',

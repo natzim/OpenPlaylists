@@ -22,7 +22,8 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
         @if ($playlist->isFork())
             <p class="text-muted">
                 <i class="fa fa-code-fork"></i>
-                Fork of <a href="{{ route('playlists.show', $playlist->forkParent->slug) }}">{{ $playlist->forkParent->name }}</a> by {{ $playlist->forkParent->user->name }}
+                Fork of <a href="{{ route('playlists.show', $playlist->forkParent->slug) }}">{{ $playlist->forkParent->name }}</a> by
+                <a href="{{ route('users.show', $playlist->forkParent->user->name) }}">{{ $playlist->forkParent->user->name }}</a>
             </p>
         @endif
         @if (Auth::check())
@@ -39,7 +40,7 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
             <hr>
         @endif
         <p class="text-muted">
-            Created {{ $playlist->created_at->diffForHumans() }} by {{ $playlist->user->name }}
+            Created {{ $playlist->created_at->diffForHumans() }} by <a href="{{ route('users.show', $playlist->user->name) }}">{{ $playlist->user->name }}</a>
         </p>
         @if ($playlist->hasBeenUpdated())
             <p class="text-muted">

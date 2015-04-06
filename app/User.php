@@ -17,6 +17,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $fillable = ['name', 'email', 'password'];
 
+    public function scopeFindByNameOrFail($query, $name)
+    {
+        return $query->where('name', $name)
+            ->firstOrFail();
+    }
+
     public function owns($resource)
     {
         return $resource->user_id === Auth::id();
