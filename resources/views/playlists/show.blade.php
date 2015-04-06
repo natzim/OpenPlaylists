@@ -78,22 +78,24 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
         @endforeach
     </div>
 
-    <div class="modal fade" id="fork" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Fork this playlist?</h4>
-                </div>
-                <div class="modal-footer">
-                    <form action="{{ route('playlists.fork', $playlist->slug) }}" method="post">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button class="btn btn-success">Fork</button>
-                    </form>
+    @if (Auth::check())
+        <div class="modal fade" id="fork" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Fork this playlist?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{ route('playlists.fork', $playlist->slug) }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button class="btn btn-success">Fork</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     @if ($owns)
         <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-hidden="true">
