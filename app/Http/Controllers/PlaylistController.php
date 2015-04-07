@@ -33,7 +33,7 @@ class PlaylistController extends Controller {
 
         $query = Request::input('search');
 
-        $playlists = Playlist::search($query)->paginate(15);
+        $playlists = Playlist::with('genre', 'songs')->search($query)->paginate(15);
 
         return view('playlists.index', [
             'playlists' => $playlists
