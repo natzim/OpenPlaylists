@@ -34,7 +34,8 @@ class PlaylistController extends Controller {
         if (Request::has('search'))
         {
             $search = Request::input('search');
-            $playlists = Playlist::with('songs')->where('name', 'like', "%$search%");
+
+            $playlists = Playlist::search($search);
         }
         else
         {

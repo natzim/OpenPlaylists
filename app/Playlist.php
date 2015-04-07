@@ -3,16 +3,24 @@
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Nicolaslopezj\Searchable\SearchableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Playlist extends Model implements SluggableInterface {
 
     use SluggableTrait;
+    use SearchableTrait;
     use SoftDeletes;
 
     protected $table = 'playlists';
 
     protected $sluggable = [];
+
+    protected $searchable = [
+        'columns' => [
+            'playlists.name' => 10
+        ]
+    ];
 
     /**
      * Get a playlist from slug
