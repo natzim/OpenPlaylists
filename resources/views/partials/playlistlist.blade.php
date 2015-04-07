@@ -1,11 +1,26 @@
-<div class="list-group">
-    @foreach($playlists as $playlist)
-        <div class="list-group-item">
-            <a href="{{ route('playlists.show', $playlist->slug) }}">{{ $playlist->name }}</a>
-            @if (!empty($playlist->genre->name))
-                <span class="label label-default">{{ $playlist->genre->name }}</span>
-            @endif
-            <span class="badge">{{ $playlist->songs->count() }}</span>
-        </div>
-    @endforeach
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Genre</th>
+            <th>Songs</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($playlists as $playlist)
+            <tr>
+                <td>
+                    <a href="{{ route('playlists.show', $playlist->slug) }}">{{ $playlist->name }}</a>
+                </td>
+                <td>
+                    @if (!empty($playlist->genre->name))
+                        <span class="label label-default">{{ $playlist->genre->name }}</span>
+                    @endif
+                </td>
+                <td>
+                    <span class="badge">{{ $playlist->songs->count() }}</span>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
