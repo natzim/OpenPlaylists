@@ -18,7 +18,7 @@ class Playlist extends Model implements SluggableInterface {
 
     protected $searchable = [
         'columns' => [
-            'playlists.name' => 10
+            'name' => 10
         ]
     ];
 
