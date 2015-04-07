@@ -31,19 +31,12 @@ class PlaylistController extends Controller {
     {
         Request::flash();
 
-        if (Request::has('search'))
-        {
-            $search = Request::input('search');
+        $query = Request::input('search');
 
-            $playlists = Playlist::search($search);
-        }
-        else
-        {
-            $playlists = Playlist::with('songs');
-        }
+        $playlists = Playlist::search($query)->paginate(15);
 
         return view('playlists.index', [
-            'playlists' => $playlists->paginate(15)
+            'playlists' => $playlists
         ]);
     }
 
