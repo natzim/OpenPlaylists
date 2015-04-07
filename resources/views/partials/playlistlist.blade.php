@@ -14,7 +14,7 @@
                 </td>
                 <td>
                     @if (!empty($playlist->genre->name))
-                        <span class="label label-default">{{ $playlist->genre->name }}</span>
+                        @include('partials.genre', ['genre' => $playlist->genre])
                     @endif
                 </td>
                 <td>

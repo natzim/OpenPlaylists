@@ -9,9 +9,6 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
         <div class="page-header">
             <h1>
                 {{ $playlist->name }}
-                @if (!empty($playlist->genre->name))
-                    <span class="label label-default">{{ $playlist->genre->name }}</span>
-                @endif
                 <small class="pull-right">
                     @if ($owns)
                         <button class="btn" data-toggle="modal" data-target="#edit">
@@ -41,6 +38,9 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
                 </button>
             @endif
             <hr>
+        @endif
+        @if (!empty($playlist->genre->name))
+            <h3>@include('partials.genre', ['genre' => $playlist->genre])</h3>
         @endif
         <p class="text-muted">
             Created {{ $playlist->created_at->diffForHumans() }} by <a href="{{ route('users.show', $playlist->user->name) }}">{{ $playlist->user->name }}</a>
