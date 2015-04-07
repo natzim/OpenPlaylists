@@ -78,7 +78,7 @@ class PlaylistController extends Controller {
      */
     public function show($slug)
     {
-        $playlist = Playlist::with('songs', 'forkParent')->findBySlugOrFail($slug);
+        $playlist = Playlist::with('songs', 'forkParent', 'genre')->findBySlugOrFail($slug);
 
         return view('playlists.show', [
             'playlist' => $playlist
