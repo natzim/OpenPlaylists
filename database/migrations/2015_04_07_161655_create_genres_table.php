@@ -17,7 +17,8 @@ class CreateGenresTable extends Migration {
             $table->increments('id');
             $table->string('name', 20);
             $table->integer('parent_id')
-                ->unsigned();
+                ->unsigned()
+                ->nullable();
         });
 	}
 
