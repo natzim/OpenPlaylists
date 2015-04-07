@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Author</th>
             <th>Genre</th>
             <th>Songs</th>
         </tr>
@@ -11,6 +12,9 @@
             <tr>
                 <td>
                     <a href="{{ route('playlists.show', $playlist->slug) }}">{{ $playlist->name }}</a>
+                </td>
+                <td>
+                    <a href="{{ route('users.show', $playlist->user->name) }}">{{ $playlist->user->name }}</a>
                 </td>
                 <td>
                     @if (!empty($playlist->genre->name))
