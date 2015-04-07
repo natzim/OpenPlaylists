@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1d2673c5293a9358cb87436da434afb4",
+    "hash": "5fe9a6213124558ab7308c06e88da8ce",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -72,12 +72,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cviebrock/eloquent-sluggable.git",
-                "reference": "31a74b89b1ab5d9183d4789fc6b6de5f8b307182"
+                "reference": "3483a412feb0c4b687cd88ecc59f5644334df3d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/31a74b89b1ab5d9183d4789fc6b6de5f8b307182",
-                "reference": "31a74b89b1ab5d9183d4789fc6b6de5f8b307182",
+                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/3483a412feb0c4b687cd88ecc59f5644334df3d4",
+                "reference": "3483a412feb0c4b687cd88ecc59f5644334df3d4",
                 "shasum": ""
             },
             "require": {
@@ -114,7 +114,7 @@
                 "laravel",
                 "slug"
             ],
-            "time": "2015-03-23 02:12:08"
+            "time": "2015-04-07 02:26:43"
         },
         {
             "name": "danielstjules/stringy",
@@ -830,6 +830,51 @@
                 "time"
             ],
             "time": "2015-03-26 03:05:57"
+        },
+        {
+            "name": "nicolaslopezj/searchable",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicolaslopezj/searchable.git",
+                "reference": "f4d3bc57f48b853e51aa67fbc655be1fa16600c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicolaslopezj/searchable/zipball/f4d3bc57f48b853e51aa67fbc655be1fa16600c8",
+                "reference": "f4d3bc57f48b853e51aa67fbc655be1fa16600c8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "4.2.x|~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nicolaslopezj\\Searchable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Lopez",
+                    "email": "nicolaslopezj@me.com"
+                }
+            ],
+            "description": "Eloquent model search trait.",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "model",
+                "search",
+                "searchable"
+            ],
+            "time": "2015-04-05 14:42:11"
         },
         {
             "name": "nikic/php-parser",
