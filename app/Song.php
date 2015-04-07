@@ -8,8 +8,6 @@ class Song extends Model {
 
     public $timestamps = false;
 
-    protected $visible = ['youtube_id'];
-
     public function playlists()
     {
         return $this->belongsToMany('App\Playlist');
