@@ -76,4 +76,9 @@ class Playlist extends Model implements SluggableInterface {
         return $this->belongsTo('App\User');
     }
 
+    public function genre()
+    {
+        return $this->belongsTo('App\Genre');
+    }
+
 }

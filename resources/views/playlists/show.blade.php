@@ -9,6 +9,7 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
         <div class="page-header">
             <h1>
                 {{ $playlist->name }}
+                <span class="label label-default">{{ $playlist->genre->name }}</span>
                 <small class="pull-right">
                     @if ($owns)
                         <button class="btn" data-toggle="modal" data-target="#edit">
