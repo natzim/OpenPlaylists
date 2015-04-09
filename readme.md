@@ -29,3 +29,7 @@ Seed databases (for testing)
 ```
 php artisan db:seed
 ```
+
+## Contributing
+
+For details on contributing to this project, please read the [contributing document](CONTRIBUTING.md)
