@@ -8,6 +8,11 @@ class Song extends Model {
 
     public $timestamps = false;
 
+    /**
+     * Find playlists that contain song
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function playlists()
     {
         return $this->belongsToMany('App\Playlist');
