@@ -39,8 +39,7 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
                 <span class="sr-only">Toggle Navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -52,8 +51,7 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="{{ route('playlists.index') }}" class="dropdown-toggle" data-toggle="dropdown"
-                       role="button" aria-expanded="false">Playlists <span class="caret"></span></a>
+                    <a href="{{ route('playlists.index') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Playlists <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ route('playlists.index') }}">View</a></li>
                         <li><a href="{{ route('playlists.create') }}">Create</a></li>
@@ -66,8 +64,7 @@
                     <li><a href="{{ url('/auth/register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('users.show', Auth::user()->name) }}">Profile</a></li>
                             <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
@@ -82,8 +79,7 @@
 <div class="container">
     @if (Session::has('message'))
         <div class="alert alert-info alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             {{ Session::get('message') }}
         </div>
     @endif
