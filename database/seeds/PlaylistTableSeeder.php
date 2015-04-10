@@ -14,8 +14,9 @@ class PlaylistTableSeeder extends Seeder {
         for ($i = 0; $i < 200; $i++)
         {
             Playlist::create([
-                'name'    => $faker->catchPhrase,
-                'user_id' => rand(1, 50)
+                'name'     => $faker->catchPhrase,
+                'user_id'  => rand(1, 50),
+                'genre_id' => rand(1, 216)
             ]);
         }
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Playlist;
 use App\Http\Requests\PlaylistRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -31,14 +32,18 @@ class PlaylistController extends Controller {
     {
         Request::flash();
 
-        if (Request::has('search'))
+        $query = Request::input('search');
+
+        $playlists = Playlist::with('genre', 'songs', 'user')->search($query);
+
+        if (Request::has('genre'))
         {
-            $search = Request::input('search');
-            $playlists = Playlist::with('songs')->where('name', 'like', "%$search%");
-        }
-        else
-        {
-            $playlists = Playlist::with('songs');
+            $playlists->whereHas('genre', function ($q)
+            {
+                $genre = Request::input('genre');
+
+                $q->where('name', $genre);
+            });
         }
 
         return view('playlists.index', [
@@ -84,7 +89,16 @@ class PlaylistController extends Controller {
      */
     public function show($slug)
     {
-        $playlist = Playlist::with('songs', 'forkParent')->findBySlugOrFail($slug);
+        if (Cache::has("playlist_$slug"))
+        {
+            $playlist = Cache::get("playlist_$slug");
+        }
+        else
+        {
+            $playlist = Playlist::with('songs', 'forkParent', 'genre')->findBySlugOrFail($slug);
+
+            Cache::forever("playlist_$slug", $playlist);
+        }
 
         return view('playlists.show', [
             'playlist' => $playlist
@@ -147,6 +161,8 @@ class PlaylistController extends Controller {
             ->playlists()
             ->findBySlugOrFail($slug);
 
+        Cache::forget("playlist_$slug");
+
         $playlist->delete();
 
         Session::flash('message', 'Playlist successfully deleted!');
@@ -163,7 +179,14 @@ class PlaylistController extends Controller {
      */
     public function fork($slug)
     {
-        $forkedPlaylist = Playlist::with('songs')->findBySlugOrFail($slug);
+        if (Cache::has("playlist_$slug"))
+        {
+            $forkedPlaylist = Cache::get("playlist_$slug");
+        }
+        else
+        {
+            $forkedPlaylist = Playlist::with('songs')->findBySlugOrFail($slug);
+        }
 
         $playlist = $forkedPlaylist->replicate();
 
@@ -180,6 +203,8 @@ class PlaylistController extends Controller {
         {
             $playlist->songs()->save($song);
         }
+
+        Cache::forever("playlist_$playlist->slug", $playlist);
 
         return redirect()->route('playlists.show', $playlist->slug);
     }

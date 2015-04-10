@@ -1,0 +1,13 @@
+{
+  "name": "OpenPlaylists",
+  "private": true,
+  "homepage": "https://github.com/natzim/OpenPlaylists",
+  "authors": [
+    "Nat Zimmermann <nat@natzim.me>"
+  ],
+  "dependencies": {
+    "bootswatch-dist": "lumen",
+    "font-awesome": "~4.3.0",
+    "jquery": "~2.1.3"
+  }
+}

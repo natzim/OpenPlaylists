@@ -3,50 +3,30 @@
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Nicolaslopezj\Searchable\SearchableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/**
- * App\Playlist
- *
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Song[]     $songs
- * @property-read \App\Playlist                                            $forkParent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Playlist[] $forks
- * @property integer                                                       $id
- * @property integer                                                       $user_id
- * @property integer                                                       $forked_playlist_id
- * @property string                                                        $name
- * @property \Carbon\Carbon                                                $created_at
- * @property \Carbon\Carbon                                                $updated_at
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereUserId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereForkedPlaylistId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereUpdatedAt($value)
- * @property-read \App\User                                                $author
- * @property integer                                                       $fork_parent_id
- * @property-read \App\User                                                $user
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereForkParentId($value)
- * @property string                                                        $slug
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereSlug($value)
- * @property string                                                        $deleted_at
- * @method static \Illuminate\Database\Query\Builder|\App\Playlist whereDeletedAt($value)
- * @method static \App\Playlist findBySlugOrFail($slug)
- */
 class Playlist extends Model implements SluggableInterface {
 
     use SluggableTrait;
+    use SearchableTrait;
     use SoftDeletes;
 
     protected $table = 'playlists';
 
     protected $sluggable = [];
 
+    protected $searchable = [
+        'columns' => [
+            'name' => 10
+        ]
+    ];
+
     /**
      * Get a playlist from slug
      *
-     * @param $query
-     * @param $slug
+     * @param Playlist $query
+     * @param string $slug
      *
      * @return \App\Playlist
      */
@@ -76,24 +56,54 @@ class Playlist extends Model implements SluggableInterface {
         return $this->updated_at > $this->created_at;
     }
 
+    /**
+     * Find playlist's songs
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function songs()
     {
         return $this->belongsToMany('App\Song');
     }
 
+    /**
+     * Find the playlist that the playlist was forked from
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function forkParent()
     {
         return $this->belongsTo('App\Playlist', 'fork_parent_id');
     }
 
+    /**
+     * Find forks of the playlist
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function forks()
     {
         return $this->hasMany('App\Playlist', 'fork_parent_id');
     }
 
+    /**
+     * Find playlist author
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Find playlist genre
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function genre()
+    {
+        return $this->belongsTo('App\Genre');
     }
 
 }

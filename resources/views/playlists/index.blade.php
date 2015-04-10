@@ -7,6 +7,11 @@
     <form>
         <div class="form-group">
             <label for="search">Search</label>
+            {{-- Adds the genre to the search query --}}
+            @if (Request::has('genre'))
+                <input type="hidden" name="genre" value="{{ Request::input('genre') }}">
+            @endif
+
             <input class="form-control" type="text" name="search" id="search" value="{{ old('search') }}">
         </div>
         <button class="btn btn-primary">
@@ -15,15 +20,6 @@
         </button>
     </form>
     <hr>
-    <div class="list-group">
-        @forelse ($playlists as $playlist)
-            <div class="list-group-item">
-                <a href="{{ route('playlists.show', $playlist->slug) }}">{{ $playlist->name }}</a>
-                <span class="badge">{{ $playlist->songs->count() }}</span>
-            </div>
-        @empty
-            <p class="lead">Sorry, we couldn't find any playlists!</p>
-        @endforelse
-    </div>
+    @include('partials.playlistlist')
     {!! $playlists->render() !!}
 @stop

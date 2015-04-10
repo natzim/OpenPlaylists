@@ -13,9 +13,9 @@ class AuthController extends Controller {
     protected $redirectTo = '/';
 
     /**
-     * Create a new authentication controller instance.
+     * Create a new authentication controller instance
      *
-     * @param Guard     $auth
+     * @param Guard $auth
      * @param Registrar $registrar
      */
     public function __construct(Guard $auth, Registrar $registrar)
@@ -29,7 +29,7 @@ class AuthController extends Controller {
     }
 
     /**
-     * Handle a registration request for the application.
+     * Handle a registration request for the application
      *
      * @param Request $request
      *
@@ -38,7 +38,7 @@ class AuthController extends Controller {
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            'name'     => 'required',
+            'name' => 'required',
             'password' => 'required'
         ]);
 

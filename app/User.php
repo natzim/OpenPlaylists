@@ -7,25 +7,6 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * App\User
- *
- * @property integer                                                       $id
- * @property string                                                        $name
- * @property string                                                        $email
- * @property string                                                        $password
- * @property string                                                        $remember_token
- * @property \Carbon\Carbon                                                $created_at
- * @property \Carbon\Carbon                                                $updated_at
- * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Playlist[] $playlists
- */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
     use Authenticatable, CanResetPassword;
@@ -36,11 +17,37 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $fillable = ['name', 'email', 'password'];
 
+    /**
+     * Find a user by name
+     *
+     * @param User $query
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function scopeFindByNameOrFail($query, $name)
+    {
+        return $query->where('name', $name)
+            ->firstOrFail();
+    }
+
+    /**
+     * Does the current user own the given resource?
+     *
+     * @param Model $resource
+     *
+     * @return bool
+     */
     public function owns($resource)
     {
         return $resource->user_id === Auth::id();
     }
 
+    /**
+     * Find playlists that the user has created
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function playlists()
     {
         return $this->hasMany('App\Playlist');

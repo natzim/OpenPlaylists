@@ -148,7 +148,6 @@ return [
         /*
          * Custom Service Providers...
          */
-        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Cviebrock\EloquentSluggable\SluggableServiceProvider',
         'Collective\Html\HtmlServiceProvider',
 

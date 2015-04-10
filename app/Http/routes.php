@@ -7,12 +7,17 @@ Route::get('/', function ()
 
 Route::post('playlists/{slug}/fork', [
     'uses' => 'PlaylistController@fork',
-    'as'   => 'playlists.fork'
+    'as' => 'playlists.fork'
 ]);
 
 Route::resource('playlists', 'PlaylistController');
 
+Route::get('user/{name}', [
+    'uses' => 'ProfileController@show',
+    'as'   => 'users.show'
+]);
+
 Route::controllers([
-    'auth'     => 'Auth\AuthController',
+    'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
