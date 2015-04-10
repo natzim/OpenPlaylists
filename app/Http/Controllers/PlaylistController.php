@@ -34,7 +34,7 @@ class PlaylistController extends Controller {
 
         $query = Request::input('search');
 
-        $playlists = Playlist::with('genre', 'songs', 'user')->search($query);
+        $playlists = Playlist::search($query);
 
         if (Request::has('genre'))
         {
@@ -95,7 +95,7 @@ class PlaylistController extends Controller {
         }
         else
         {
-            $playlist = Playlist::with('songs', 'forkParent', 'genre')->findBySlugOrFail($slug);
+            $playlist = Playlist::findBySlugOrFail($slug);
 
             Cache::forever("playlist_$slug", $playlist);
         }
