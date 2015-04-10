@@ -10,11 +10,7 @@ Route::post('playlists/{slug}/fork', [
     'as'   => 'playlists.fork'
 ]);
 
-Route::resource('playlists', 'PlaylistController', [
-    'except' => [
-        'edit'
-    ]
-]);
+Route::resource('playlists', 'PlaylistController');
 
 Route::controllers([
     'auth'     => 'Auth\AuthController',

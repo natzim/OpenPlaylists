@@ -92,6 +92,24 @@ class PlaylistController extends Controller {
     }
 
     /**
+     * Display form for editing playlist
+     *
+     * @param string $slug Playlist slug
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit($slug)
+    {
+        $playlist = Auth::user()
+            ->playlists()
+            ->findBySlugOrFail($slug);
+
+        return view('playlists.edit', [
+            'playlist' => $playlist
+        ]);
+    }
+
+    /**
      * Update a playlist
      *
      * @param string          $slug Playlist slug
@@ -104,6 +122,8 @@ class PlaylistController extends Controller {
         $playlist = Auth::user()
             ->playlists()
             ->findBySlugOrFail($slug);
+
+        dd($request->input('songs'));
 
         $playlist->name = $request->input('name');
 
