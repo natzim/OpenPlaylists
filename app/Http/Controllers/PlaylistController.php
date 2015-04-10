@@ -47,7 +47,7 @@ class PlaylistController extends Controller {
         }
 
         return view('playlists.index', [
-            'playlists' => $playlists->paginate(15)
+            'playlists' => $playlists->simplePaginate(15)
         ]);
     }
 
