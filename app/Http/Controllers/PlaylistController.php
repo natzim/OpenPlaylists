@@ -89,15 +89,15 @@ class PlaylistController extends Controller {
      */
     public function show($slug)
     {
-        if (Cache::has("playlist_$slug"))
+        if (Cache::has('playlist_' . $slug))
         {
-            $playlist = Cache::get("playlist_$slug");
+            $playlist = Cache::get('playlist_' . $slug);
         }
         else
         {
             $playlist = Playlist::findBySlugOrFail($slug);
 
-            Cache::forever("playlist_$slug", $playlist);
+            Cache::forever('playlist_' . $slug, $playlist);
         }
 
         return view('playlists.show', [
@@ -126,7 +126,7 @@ class PlaylistController extends Controller {
     /**
      * Update a playlist
      *
-     * @param string          $slug Playlist slug
+     * @param string $slug Playlist slug
      * @param PlaylistRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -161,7 +161,7 @@ class PlaylistController extends Controller {
             ->playlists()
             ->findBySlugOrFail($slug);
 
-        Cache::forget("playlist_$slug");
+        Cache::forget('playlist_' . $slug);
 
         $playlist->delete();
 
@@ -179,9 +179,9 @@ class PlaylistController extends Controller {
      */
     public function fork($slug)
     {
-        if (Cache::has("playlist_$slug"))
+        if (Cache::has('playlist_' . $slug))
         {
-            $forkedPlaylist = Cache::get("playlist_$slug");
+            $forkedPlaylist = Cache::get('playlist_' . $slug);
         }
         else
         {
@@ -204,7 +204,7 @@ class PlaylistController extends Controller {
             $playlist->songs()->save($song);
         }
 
-        Cache::forever("playlist_$playlist->slug", $playlist);
+        Cache::forever('playlist_' . $playlist->slug, $playlist);
 
         return redirect()->route('playlists.show', $playlist->slug);
     }
