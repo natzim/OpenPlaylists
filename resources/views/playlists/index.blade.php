@@ -21,5 +21,4 @@
     </form>
     <hr>
     @include('partials.playlistlist')
-    {!! $playlists->render() !!}
 @stop
