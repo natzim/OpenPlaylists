@@ -137,8 +137,6 @@ class PlaylistController extends Controller {
             ->playlists()
             ->findBySlugOrFail($slug);
 
-        dd($request->input('songs'));
-
         $playlist->name = $request->input('name');
 
         $playlist->resluggify();
