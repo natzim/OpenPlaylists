@@ -1,10 +1,18 @@
-$('#input-genre').treeview({
+$tree = $('#input-genre');
+$input = $('#genre');
+
+$tree.treeview({
     data: [
         {
             text: 'Electronic',
             nodes: [
                 {
-                    text: 'Electro'
+                    text: 'Electro',
+                    nodes: [
+                        {
+                            text: 'Electro rock'
+                        }
+                    ]
                 }
             ]
         },
@@ -18,7 +26,32 @@ $('#input-genre').treeview({
         }
     ],
     levels: 1,
+    highlightSearchResults: false,
     onNodeSelected: function(event, node) {
-        $('#genre').val(node.text);
+        $input.val(node.text);
+    },
+    onSearchComplete: function(event, results) {
+        if (!$.isEmptyObject(results)) {
+            var node = results[0];
+
+            $tree.treeview('selectNode', node.nodeId);
+            expandParents(node);
+        }
     }
 });
+
+if ($input.val() !== '') {
+    $tree.treeview('search', [$input.val(), {
+        ignoreCase: true,
+        exactMatch: true
+    }]);
+}
+
+function expandParents(node) {
+    var parent = $tree.treeview('getParent', node);
+
+    if (parent !== $tree) {
+        $tree.treeview('expandNode', parent);
+        expandParents(parent);
+    }
+}
