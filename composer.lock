@@ -883,16 +883,16 @@
         },
         {
             "name": "nicolaslopezj/searchable",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nicolaslopezj/searchable.git",
-                "reference": "f4d3bc57f48b853e51aa67fbc655be1fa16600c8"
+                "reference": "d5b7e6554c1f9038da0f23cc1a699eebf0b6eabe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nicolaslopezj/searchable/zipball/f4d3bc57f48b853e51aa67fbc655be1fa16600c8",
-                "reference": "f4d3bc57f48b853e51aa67fbc655be1fa16600c8",
+                "url": "https://api.github.com/repos/nicolaslopezj/searchable/zipball/d5b7e6554c1f9038da0f23cc1a699eebf0b6eabe",
+                "reference": "d5b7e6554c1f9038da0f23cc1a699eebf0b6eabe",
                 "shasum": ""
             },
             "require": {
@@ -924,7 +924,7 @@
                 "search",
                 "searchable"
             ],
-            "time": "2015-04-05 14:42:11"
+            "time": "2015-04-14 13:38:44"
         },
         {
             "name": "nikic/php-parser",
@@ -1953,12 +1953,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "6b1d646e38fad6dcd3191d69c40918fd7aeaa2f8"
+                "reference": "901bde792eddf6907f33634ff8aafb2dfddd4784"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/6b1d646e38fad6dcd3191d69c40918fd7aeaa2f8",
-                "reference": "6b1d646e38fad6dcd3191d69c40918fd7aeaa2f8",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/901bde792eddf6907f33634ff8aafb2dfddd4784",
+                "reference": "901bde792eddf6907f33634ff8aafb2dfddd4784",
                 "shasum": ""
             },
             "require": {
@@ -1997,7 +1997,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-03-30 08:56:14"
+            "time": "2015-04-14 13:37:56"
         }
     ],
     "aliases": [],
