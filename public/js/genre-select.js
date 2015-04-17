@@ -26,6 +26,11 @@ $tree.treeview({
         }
     ],
     levels: 1,
+    expandIcon: 'fa fa-plus',
+    collapseIcon: 'fa fa-minus',
+    nodeIcon: '',
+    emptyIcon: '',
+    selectedBackColor: '#158cba',
     highlightSearchResults: false,
     onNodeSelected: function(event, node) {
         $input.val(node.text);
