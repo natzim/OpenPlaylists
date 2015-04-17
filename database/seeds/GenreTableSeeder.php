@@ -10,288 +10,264 @@ class GenreTableSeeder extends Seeder {
         DB::table('genres')->truncate();
 
         $genres = [
-            'electronic' => [
-                'ambient' => [
-                    'ambient dub',
-                    'industrial ambient',
-                    'dark ambient',
-                    'drone',
-                    'isolationism',
-                ],
-                'breakbeat' => [
-                    'acid breaks',
-                    'baltimore club',
-                    'big beat',
-                    'broken beat',
-                    'jersey club',
-                    'nu skool breaks',
-                    'florida breaks' => [
-                        'nu-funk',
-                        'miami bass',
-                    ],
-                ],
-                'disco' => [
-                    'cosmic disco',
-                    'disco polo',
-                    'euro disco',
-                    'italo disco',
-                    'space disco',
-                ],
-                'downtempo' => [
-                    'acid jazz',
-                    'chill-out',
-                    'flamenco chill',
-                    'ethnic electronic',
-                    'psybient',
-                    'new-age',
-                    'trip hop',
-                ],
-                'drum and bass' => [
-                    'darkstep',
-                    'drill and bass',
-                    'drumstep',
-                    'funkstep',
-                    'hardstep',
-                    'jazzstep',
-                    'jump-up',
-                    'liquid funk',
-                    'neurofunk',
-                    'sambass',
-                    'techstep' => [
-                        'skulls',
-                    ],
-                ],
-                'electro' => [
-                    'freestyle',
-                ],
-                'electroacoustic' => [
-                    'acousmatic',
-                    'musique concrète',
-                ],
-                'electronic rock' => [
-                    'coldwave',
-                    'dance-punk',
-                    'dark wave',
-                    'electroclash',
-                    'electronicore',
-                    'ethereal wave',
-                    'krautrock',
-                    'new rave',
-                    'nu-gaze',
-                    'space rock',
-                    'synthpop',
-                    'synthpunk',
-                    'alternative dance' => [
-                        'indietronica',
-                    ],
-                ],
-                'electronica' => [
-                    'berlin school',
-                    'dubtronica',
-                    'folktronica',
-                    'funktronica',
-                    'laptronica',
-                    'livetronica',
-                    'chillwave' => [
-                        'vaporwave',
-                    ],
-                ],
-                'hardcore' => [
-                    '4-beat',
-                    'breakbeat hardcore',
-                    'bouncy techno',
-                    'breakcore',
-                    'digital hardcore',
-                    'darkcore',
-                    'gabber',
-                    'happy hardcore',
-                    'speedcore',
-                    'terrorcore',
-                    'trancecore',
-                    'uk hardcore',
-                    'mákina' => [
-                        'melbourne bounce',
-                    ],
-                ],
-                'hardstyle' => [
-                    'dubstyle',
-                    'jumpstyle',
-                    'lento violento',
-                    'rawstyle',
-                ],
-                'hi-nrg' => [
-                    'eurobeat',
-                    'eurodance' => [
-                        'bubblegum dance',
-                        'italo dance',
-                    ],
-                ],
-                'house' => [
-                    'acid house',
-                    'ambient house',
-                    'balearic beat',
-                    'chicago house',
-                    'deep house',
-                    'diva house',
-                    'dream house',
-                    'euro house',
-                    'french house',
-                    'funky house',
-                    'garage house',
-                    'glitch house',
-                    'hardbag',
-                    'hip house',
-                    'italo house',
-                    'jazz house',
-                    'kwaito',
-                    'latin house',
-                    'microhouse',
-                    'new beat',
-                    'nu-disco',
-                    'outsider house',
-                    'progressive house',
-                    'swing house',
-                    'tech house',
-                    'tribal house',
-                    'tropical house',
-                    'witch house',
-                    'electro house' => [
-                        'big room',
-                        'complextro',
-                        'dutch house',
-                        'fidget house',
-                        'moombahton' => [
-                            'moombahcore',
-                        ],
-                    ],
-                    'ghetto house' => [
-                        'ghettotech',
-                    ],
-                    'hard house' => [
-                        'hard bounce',
-                        'hard dance',
-                        'hard nrg',
-                        'nu-nrg',
-                    ],
-                ],
-                'industrial' => [
-                    'aggrotech',
-                    'cybergrind',
-                    'electro-industrial',
-                    'dark electro',
-                    'electronic body',
-                    'futurepop',
-                    'industrial metal',
-                    'industrial rock',
-                    'japanoise',
-                    'neue deutsche härte',
-                    'power noise',
-                    'power electronics' => [
-                        'death industrial',
-                    ],
-                ],
-                'idm' => [
-                    'glitch',
-                    'wonky',
-                ],
-                'jungle' => [
-                    'darkcore jungle',
-                    'raggacore',
-                    'ragga-jungle',
-                ],
-                'post-disco' => [
-                    'boogie',
-                    'electropop',
-                    'dance-pop',
-                    'dance-rock',
-                ],
-                'techno' => [
-                    'acid techno',
-                    'detroit techno',
-                    'dub techno',
-                    'free tekno',
-                    'hardtechno',
-                    'minimal techno',
-                    'nortec',
-                    'schranz',
-                    'tecno brega',
-                    'techdombe',
-                ],
-                'trance' => [
-                    'acid trance',
-                    'dream trance',
-                    'goa trance',
-                    'hard trance',
-                    'ibiza trance',
-                    'nitzhonot',
-                    'progressive trance',
-                    'tech trance',
-                    'uplifting trance',
-                    'vocal trance',
-                    'melodic trance',
-                    'classic trance',
-                    'epic trance',
-                    'psychedelic trance' => [
-                        'dark psytrance',
-                        'full on',
-                        'psybreaks',
-                        'suomisaundi',
-                        'psybient',
-                    ],
-                ],
-                'uk garage' => [
-                    'breakstep',
-                    'future garage',
-                    'uk funky',
-                    '2-step garage' => [
-                        'dubstep' => [
-                            'brostep',
-                            'purple sound',
-                        ],
-                    ],
-                    'grime' => [
-                        'grindie',
-                    ],
-                    'speed garage' => [
-                        'bassline',
-                    ],
-                ],
-                'video game' => [
-                    'nintendocore',
-                    'skweee',
-                    'chiptune' => [
-                        'bitpop',
-                        'game boy',
-                    ],
-                ],
-            ],
+            ['name' => 'electronic', 'children' => [
+                ['name' => 'ambient', 'children' => [
+                    ['name' => 'ambient dub'],
+                    ['name' => 'industrial ambient'],
+                    ['name' => 'dark ambient'],
+                    ['name' => 'drone'],
+                    ['name' => 'isolationism'],
+                ]],
+                ['name' => 'breakbeat', 'children' => [
+                    ['name' => 'acid breaks'],
+                    ['name' => 'baltimore club'],
+                    ['name' => 'big beat'],
+                    ['name' => 'broken beat'],
+                    ['name' => 'jersey club'],
+                    ['name' => 'nu skool breaks'],
+                    ['name' => 'florida breaks', 'children' => [
+                        ['name' => 'nu-funk'],
+                        ['name' => 'miami bass'],
+                    ]],
+                ]],
+                ['name' => 'disco', 'children' => [
+                    ['name' => 'cosmic disco'],
+                    ['name' => 'disco polo'],
+                    ['name' => 'euro disco'],
+                    ['name' => 'italo disco'],
+                    ['name' => 'space disco'],
+                ]],
+                ['name' => 'downtempo', 'children' => [
+                    ['name' => 'acid jazz'],
+                    ['name' => 'chill-out'],
+                    ['name' => 'flamenco chill'],
+                    ['name' => 'ethnic electronic'],
+                    ['name' => 'psybient'],
+                    ['name' => 'new-age'],
+                    ['name' => 'trip hop'],
+                ]],
+                ['name' => 'drum and bass', 'children' => [
+                    ['name' => 'darkstep'],
+                    ['name' => 'drill and bass'],
+                    ['name' => 'drumstep'],
+                    ['name' => 'funkstep'],
+                    ['name' => 'hardstep'],
+                    ['name' => 'jazzstep'],
+                    ['name' => 'jump-up'],
+                    ['name' => 'liquid funk'],
+                    ['name' => 'neurofunk'],
+                    ['name' => 'sambass'],
+                    ['name' => 'techstep', 'children' => [
+                        ['name' => 'skulls'],
+                    ]],
+                ]],
+                ['name' => 'electro', 'children' => [
+                    ['name' => 'freestyle'],
+                ]],
+                ['name' => 'electroacoustic', 'children' => [
+                    ['name' => 'acousmatic'],
+                    ['name' => 'musique concrète'],
+                ]],
+                ['name' => 'electronic rock', 'children' => [
+                    ['name' => 'coldwave'],
+                    ['name' => 'dance-punk'],
+                    ['name' => 'dark wave'],
+                    ['name' => 'electroclash'],
+                    ['name' => 'electronicore'],
+                    ['name' => 'ethereal wave'],
+                    ['name' => 'krautrock'],
+                    ['name' => 'new rave'],
+                    ['name' => 'nu-gaze'],
+                    ['name' => 'space rock'],
+                    ['name' => 'synthpop'],
+                    ['name' => 'synthpunk'],
+                    ['name' => 'alternative dance', 'children' => [
+                        ['name' => 'indietronica'],
+                    ]],
+                ]],
+                ['name' => 'electronica', 'children' => [
+                    ['name' => 'berlin school'],
+                    ['name' => 'dubtronica'],
+                    ['name' => 'folktronica'],
+                    ['name' => 'funktronica'],
+                    ['name' => 'laptronica'],
+                    ['name' => 'livetronica'],
+                    ['name' => 'chillwave', 'children' => [
+                        ['name' => 'vaporwave'],
+                    ]],
+                ]],
+                ['name' => 'hardcore', 'children' => [
+                    ['name' => '4-beat'],
+                    ['name' => 'breakbeat hardcore'],
+                    ['name' => 'bouncy techno'],
+                    ['name' => 'breakcore'],
+                    ['name' => 'digital hardcore'],
+                    ['name' => 'darkcore'],
+                    ['name' => 'gabber'],
+                    ['name' => 'happy hardcore'],
+                    ['name' => 'speedcore'],
+                    ['name' => 'terrorcore'],
+                    ['name' => 'trancecore'],
+                    ['name' => 'uk hardcore'],
+                    ['name' => 'mákina', 'children' => [
+                        ['name' => 'melbourne bounce'],
+                    ]],
+                ]],
+                ['name' => 'hardstyle', 'children' => [
+                    ['name' => 'dubstyle'],
+                    ['name' => 'jumpstyle'],
+                    ['name' => 'lento violento'],
+                    ['name' => 'rawstyle'],
+                ]],
+                ['name' => 'hi-nrg', 'children' => [
+                    ['name' => 'eurobeat'],
+                    ['name' => 'eurodance', 'children' => [
+                        ['name' => 'bubblegum dance'],
+                        ['name' => 'italo dance'],
+                    ]],
+                ]],
+                ['name' => 'house', 'children' => [
+                    ['name' => 'acid house'],
+                    ['name' => 'ambient house'],
+                    ['name' => 'balearic beat'],
+                    ['name' => 'chicago house'],
+                    ['name' => 'deep house'],
+                    ['name' => 'diva house'],
+                    ['name' => 'dream house'],
+                    ['name' => 'euro house'],
+                    ['name' => 'french house'],
+                    ['name' => 'funky house'],
+                    ['name' => 'garage house'],
+                    ['name' => 'glitch house'],
+                    ['name' => 'hardbag'],
+                    ['name' => 'hip house'],
+                    ['name' => 'italo house'],
+                    ['name' => 'jazz house'],
+                    ['name' => 'kwaito'],
+                    ['name' => 'latin house'],
+                    ['name' => 'microhouse'],
+                    ['name' => 'new beat'],
+                    ['name' => 'nu-disco'],
+                    ['name' => 'outsider house'],
+                    ['name' => 'progressive house'],
+                    ['name' => 'swing house'],
+                    ['name' => 'tech house'],
+                    ['name' => 'tribal house'],
+                    ['name' => 'tropical house'],
+                    ['name' => 'witch house'],
+                    ['name' => 'electro house', 'children' => [
+                        ['name' => 'big room'],
+                        ['name' => 'complextro'],
+                        ['name' => 'dutch house'],
+                        ['name' => 'fidget house'],
+                        ['name' => 'moombahton', 'children' => [
+                            ['name' => 'moombahcore'],
+                        ]],
+                    ]],
+                    ['name' => 'ghetto house', 'children' => [
+                        ['name' => 'ghettotech'],
+                    ]],
+                    ['name' => 'hard house', 'children' => [
+                        ['name' => 'hard bounce'],
+                        ['name' => 'hard dance'],
+                        ['name' => 'hard nrg'],
+                        ['name' => 'nu-nrg'],
+                    ]],
+                ]],
+                ['name' => 'industrial', 'children' => [
+                    ['name' => 'aggrotech'],
+                    ['name' => 'cybergrind'],
+                    ['name' => 'electro-industrial'],
+                    ['name' => 'dark electro'],
+                    ['name' => 'electronic body'],
+                    ['name' => 'futurepop'],
+                    ['name' => 'industrial metal'],
+                    ['name' => 'industrial rock'],
+                    ['name' => 'japanoise'],
+                    ['name' => 'neue deutsche härte'],
+                    ['name' => 'power noise'],
+                    ['name' => 'power electronics', 'children' => [
+                        ['name' => 'death industrial'],
+                    ]],
+                ]],
+                ['name' => 'idm', 'children' => [
+                    ['name' => 'glitch'],
+                    ['name' => 'wonky'],
+                ]],
+                ['name' => 'jungle', 'children' => [
+                    ['name' => 'darkcore jungle'],
+                    ['name' => 'raggacore'],
+                    ['name' => 'ragga-jungle'],
+                ]],
+                ['name' => 'post-disco', 'children' => [
+                    ['name' => 'boogie'],
+                    ['name' => 'electropop'],
+                    ['name' => 'dance-pop'],
+                    ['name' => 'dance-rock'],
+                ]],
+                ['name' => 'techno', 'children' => [
+                    ['name' => 'acid techno'],
+                    ['name' => 'detroit techno'],
+                    ['name' => 'dub techno'],
+                    ['name' => 'free tekno'],
+                    ['name' => 'hardtechno'],
+                    ['name' => 'minimal techno'],
+                    ['name' => 'nortec'],
+                    ['name' => 'schranz'],
+                    ['name' => 'tecno brega'],
+                    ['name' => 'techdombe'],
+                ]],
+                ['name' => 'trance', 'children' => [
+                    ['name' => 'acid trance'],
+                    ['name' => 'dream trance'],
+                    ['name' => 'goa trance'],
+                    ['name' => 'hard trance'],
+                    ['name' => 'ibiza trance'],
+                    ['name' => 'nitzhonot'],
+                    ['name' => 'progressive trance'],
+                    ['name' => 'tech trance'],
+                    ['name' => 'uplifting trance'],
+                    ['name' => 'vocal trance'],
+                    ['name' => 'melodic trance'],
+                    ['name' => 'classic trance'],
+                    ['name' => 'epic trance'],
+                    ['name' => 'psychedelic trance', 'children' => [
+                        ['name' => 'dark psytrance'],
+                        ['name' => 'full on'],
+                        ['name' => 'psybreaks'],
+                        ['name' => 'suomisaundi'],
+                        ['name' => 'psybient'],
+                    ]],
+                ]],
+                ['name' => 'uk garage', 'children' => [
+                    ['name' => 'breakstep'],
+                    ['name' => 'future garage'],
+                    ['name' => 'uk funky'],
+                    ['name' => '2-step garage', 'children' => [
+                        ['name' => 'dubstep', 'children' => [
+                            ['name' => 'brostep'],
+                            ['name' => 'purple sound'],
+                        ]],
+                    ]],
+                    ['name' => 'grime', 'children' => [
+                        ['name' => 'grindie'],
+                    ]],
+                    ['name' => 'speed garage', 'children' => [
+                        ['name' => 'bassline'],
+                    ]],
+                ]],
+                ['name' => 'video game', 'children' => [
+                    ['name' => 'nintendocore'],
+                    ['name' => 'skweee'],
+                    ['name' => 'chiptune', 'children' => [
+                        ['name' => 'bitpop'],
+                        ['name' => 'game boy'],
+                    ]],
+                ]],
+            ]],
         ];
 
-        $this->createGenres($genres);
-    }
-
-    private function createGenres($genres, $parentGenre = null)
-    {
-        foreach ($genres as $key => $genre)
-        {
-            // If the genre has subgenres
-            if (is_array($genre))
-            {
-                $newGenre = Genre::create([
-                    'name'      => $key,
-                    'parent_id' => $parentGenre
-                ]);
-
-                $this->createGenres($genre, $newGenre->id);
-            }
-            else
-            {
-                Genre::create([
-                    'name'      => $genre,
-                    'parent_id' => $parentGenre
-                ]);
-            }
-        }
+        Genre::buildTree($genres);
     }
 
 }

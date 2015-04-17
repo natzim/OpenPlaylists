@@ -150,6 +150,7 @@ return [
          */
         'Cviebrock\EloquentSluggable\SluggableServiceProvider',
         'Collective\Html\HtmlServiceProvider',
+        'Baum\Providers\BaumServiceProvider',
 
     ],
 

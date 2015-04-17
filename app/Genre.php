@@ -1,8 +1,8 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Baum\Node;
 
-class Genre extends Model {
+class Genre extends Node {
 
     protected $table = 'genres';
 
