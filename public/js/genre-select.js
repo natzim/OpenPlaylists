@@ -30,8 +30,8 @@ function loadGenres(genres) {
         // Icons
         expandIcon: 'fa fa-plus',
         collapseIcon: 'fa fa-minus',
-        nodeIcon: '',
-        emptyIcon: '',
+        nodeIcon: 'fa',
+        emptyIcon: 'fa',
 
         // Set to Lumen's default blue
         selectedBackColor: '#158cba',
