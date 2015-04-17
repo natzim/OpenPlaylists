@@ -19,9 +19,7 @@ class ProfileController extends Controller {
         // Eager loading doesn't work here for some reason
 		$user = User::findByNameOrFail($username);
 
-        return view('users.show', [
-            'user' => $user
-        ]);
+        return view('users.show', compact('user'));
 	}
 
 }

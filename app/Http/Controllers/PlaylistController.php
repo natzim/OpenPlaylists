@@ -46,9 +46,9 @@ class PlaylistController extends Controller {
             });
         }
 
-        return view('playlists.index', [
-            'playlists' => $playlists->simplePaginate(15)
-        ]);
+        $playlists = $playlists->simplePaginate(15);
+
+        return view('playlists.index', compact('playlists'));
     }
 
     /**
@@ -100,9 +100,7 @@ class PlaylistController extends Controller {
             Cache::forever('playlist_' . $slug, $playlist);
         }
 
-        return view('playlists.show', [
-            'playlist' => $playlist
-        ]);
+        return view('playlists.show', compact('playlist'));
     }
 
     /**
@@ -118,9 +116,7 @@ class PlaylistController extends Controller {
             ->playlists()
             ->findBySlugOrFail($slug);
 
-        return view('playlists.edit', [
-            'playlist' => $playlist
-        ]);
+        return view('playlists.edit', compact('playlist'));
     }
 
     /**
