@@ -30,6 +30,15 @@ Route::get('user/{name}', [
 ]);
 
 /*
+ * API
+ */
+
+Route::group(['prefix' => 'api'], function ()
+{
+    Route::get('genres', 'GenreController@index');
+});
+
+/*
  * Authentication
  */
 
