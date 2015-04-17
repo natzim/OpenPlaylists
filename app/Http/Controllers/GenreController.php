@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 use App\Genre;
-use App\Http\Controllers\Controller;
 
 class GenreController extends Controller {
 
