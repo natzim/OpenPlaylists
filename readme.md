@@ -12,6 +12,12 @@ Clone the repo
 git clone https://github.com/natzim/OpenPlaylists
 ```
 
+Rename the example environment file
+
+```
+mv .env.example .env
+```
+
 Install resources
 
 ```
