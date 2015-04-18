@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Cache;
 
 class GenreController extends Controller {
 
+    /**
+     * Get a multidimensional array of genres
+     *
+     * @return array
+     */
     public function index()
     {
         if (Cache::has('genres'))
