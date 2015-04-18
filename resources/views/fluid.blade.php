@@ -87,15 +87,6 @@
 @yield('stuff')
 
 <script src="/js/app.js"></script>
-<script>
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-
-    $('[data-toggle=slide]').click(function() {
-        $($(this).data('target')).slideToggle();
-    });
-</script>
 
 @yield('scripts')
 

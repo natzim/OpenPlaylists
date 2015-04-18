@@ -125,6 +125,5 @@ $owns = Auth::check() && Auth::user()->owns($playlist);
 @stop
 
 @section('scripts')
-    <script src="/js/playlists-show.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
 @stop

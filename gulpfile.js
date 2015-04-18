@@ -5,7 +5,8 @@ gulp.task('js', function() {
     var input = [
         'resources/assets/jquery/dist/jquery.js',
         'resources/assets/bootswatch-dist/js/bootstrap.js',
-        'resources/assets/bootstrap-treeview/src/js/bootstrap-treeview.js'
+        'resources/assets/bootstrap-treeview/src/js/bootstrap-treeview.js',
+        'resources/assets/app.js'
     ];
 
     gulp.src(input)

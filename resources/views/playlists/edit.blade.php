@@ -23,8 +23,3 @@
         <button class="btn btn-primary">Submit</button>
     {!! Form::close() !!}
 @stop
-
-@section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5sortable/0.1.8/html.sortable.min.js"></script>
-    <script src="/js/playlists-edit.js"></script>
-@stop

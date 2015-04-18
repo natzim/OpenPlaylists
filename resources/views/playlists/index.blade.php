@@ -23,8 +23,3 @@
     <hr>
     @include('partials.playlistlist')
 @stop
-
-@section('scripts')
-    <script src="/vendor/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
-    <script src="/js/genre-select.js"></script>
-@stop
