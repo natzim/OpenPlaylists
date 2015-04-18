@@ -3,9 +3,9 @@ var concat = require('gulp-concat');
 
 gulp.task('js', function() {
     var input = [
-        'resources/assets/jquery/dist/jquery.js',
-        'resources/assets/bootswatch-dist/js/bootstrap.js',
-        'resources/assets/bootstrap-treeview/src/js/bootstrap-treeview.js',
+        'resources/assets/vendor/jquery/dist/jquery.js',
+        'resources/assets/vendor/bootswatch-dist/js/bootstrap.js',
+        'resources/assets/vendor/bootstrap-treeview/src/js/bootstrap-treeview.js',
         'resources/assets/app.js'
     ];
 
@@ -16,15 +16,15 @@ gulp.task('js', function() {
 
 gulp.task('css', function() {
     var input = [
-        'resources/assets/bootswatch-dist/css/bootstrap.css',
-        'resources/assets/font-awesome/css/font-awesome.css'
+        'resources/assets/vendor/bootswatch-dist/css/bootstrap.css',
+        'resources/assets/vendor/font-awesome/css/font-awesome.css'
     ];
 
     gulp.src(input)
         .pipe(concat('style.css'))
         .pipe(gulp.dest('public/css'));
 
-    gulp.src('resources/assets/font-awesome/fonts/*')
+    gulp.src('resources/assets/vendor/font-awesome/fonts/*')
         .pipe(gulp.dest('public/fonts'));
 });
 
