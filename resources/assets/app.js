@@ -1,124 +1,187 @@
 /*
- * General
+  ######   ######## ##    ## ######## ########     ###    ##
+ ##    ##  ##       ###   ## ##       ##     ##   ## ##   ##
+ ##        ##       ####  ## ##       ##     ##  ##   ##  ##
+ ##   #### ######   ## ## ## ######   ########  ##     ## ##
+ ##    ##  ##       ##  #### ##       ##   ##   ######### ##
+ ##    ##  ##       ##   ### ##       ##    ##  ##     ## ##
+  ######   ######## ##    ## ######## ##     ## ##     ## ########
  */
-$(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();
+
+$(document).ready(function () {
+
+    /**
+     * Add song YouTube IDs to the songs array
+     */
+    $('[data-video-id]').each(function () {
+        playlist.songs.push($(this).data('video-id'));
+    });
+
 });
 
+/**
+ * Slide toggle an element
+ *
+ * Example:
+ * <span data-toggle="slide" data-target="#slide-me">Click me!</span>
+ * <div id="slide-me">Hello World!</div>
+ *
+ * #slide-me will be slide toggled every time the <span> element is clicked
+ */
 $('[data-toggle=slide]').click(function() {
     $($(this).data('target')).slideToggle();
 });
 
 /*
- * Playlist show
+ ########  ##          ###    ##    ## ##       ####  ######  ########
+ ##     ## ##         ## ##    ##  ##  ##        ##  ##    ##    ##
+ ##     ## ##        ##   ##    ####   ##        ##  ##          ##
+ ########  ##       ##     ##    ##    ##        ##   ######     ##
+ ##        ##       #########    ##    ##        ##        ##    ##
+ ##        ##       ##     ##    ##    ##        ##  ##    ##    ##
+ ##        ######## ##     ##    ##    ######## ####  ######     ##
  */
-// Stores the YouTube player object
-var player;
-// Array of YouTube video IDs
-var songs = [];
-// Is the song currently playing?
-var playing = false;
+var playlist = {
 
-$(document).ready(function () {
+    /*
+     * Properties
+     */
+    songs: [],
+    playing: false,
 
-    // Get the YouTube video IDs and add them to the songs array
-    $('[data-video-id]').each(function () {
-        songs.push($(this).data('video-id'));
-    });
-});
+    /*
+     * Methods
+     */
+    /**
+     * Get the index in the playlist.songs array that corresponds to the song that is currently playing
+     *
+     * @return {Number}
+     */
+    getCurrentSongIndex: function() {
+        return playlist.songs.indexOf(playlist.player.getVideoData().video_id);
+    },
 
-// When a song title is clicked in the list
+    /**
+     * Called whenever the player changes state
+     *
+     * @param {Object} event
+     */
+    stateChange: function(event) {
+        switch (event.data) {
+
+            case YT.PlayerState.ENDED:
+                playlist.nextSong();
+                playlist.playing = false;
+                break;
+
+            case YT.PlayerState.PLAYING:
+                playlist.playing = true;
+                break;
+
+            case YT.PlayerState.PAUSED:
+                playlist.playing = false;
+                break;
+        }
+
+        // Make all songs inactive, then activate the current video
+        $('[data-video-id]').removeClass('active');
+
+        // Check that method exists so when it goes to the next song it does not throw an error
+        if (typeof playlist.player.getVideoData() !== 'undefined') {
+            $('[data-video-id=' + playlist.player.getVideoData().video_id + ']').addClass('active');
+        }
+
+        // Change play button
+        $('#play-icon').attr('class', 'fa fa-' + (playlist.playing ? 'pause' : 'play'));
+    },
+
+    /**
+     * Toggle between paused and playing
+     */
+    togglePlay: function() {
+        if (playlist.playing) {
+            playlist.player.pauseVideo();
+        } else {
+            playlist.player.playVideo();
+        }
+    },
+
+    /**
+     * Load the previous song
+     */
+    previousSong: function() {
+        var currentSongIndex = playlist.getCurrentSongIndex();
+
+        if (currentSongIndex > 0) {
+            playlist.player.loadVideoById(playlist.songs[currentSongIndex - 1]);
+        }
+    },
+
+    /**
+     * Load the next song
+     */
+    nextSong: function() {
+        var currentSongIndex = playlist.getCurrentSongIndex();
+
+        if (currentSongIndex < playlist.songs.length - 1) {
+            playlist.player.loadVideoById(playlist.songs[currentSongIndex + 1]);
+        }
+    },
+
+    /**
+     * Load a specific song by YouTube video ID
+     *
+     * @param {String} id
+     */
+    loadSong: function(id) {
+        playlist.player.loadVideoById(id);
+    }
+};
+
+/*
+ * Events
+ */
+/**
+ * Load a specific song when a song title is clicked
+ */
 $(document).on('click', '[data-video-id]', function (e) {
     e.preventDefault();
-    player.loadVideoById($(this).data('video-id'));
+    playlist.loadSong($(this).data('video-id'));
 });
 
-$('#play').click(togglePlay);
-$('#previous').click(previous);
-$('#next').click(next);
+$('#play').click(playlist.togglePlay);
+$('#previous').click(playlist.previousSong);
+$('#next').click(playlist.nextSong);
 
-// Toggle the play/pause state of the song
-function togglePlay() {
-    if (playing) {
-        player.pauseVideo();
-    } else {
-        player.playVideo();
-    }
-}
-
-// Play the previous song
-function previous() {
-    var currentSongIndex = songs.indexOf(player.getVideoData().video_id);
-
-    if (currentSongIndex > 0) {
-        player.loadVideoById(songs[currentSongIndex - 1]);
-    }
-}
-
-// Play the next song
-function next() {
-    var currentSongIndex = songs.indexOf(player.getVideoData().video_id);
-
-    if (currentSongIndex < songs.length - 1) {
-        player.loadVideoById(songs[currentSongIndex + 1]);
-    }
-}
-
+/**
+ * This function is called by the YouTube iFrame API when it loads
+ */
 function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
+    playlist.player = new YT.Player('player', {
 
         // Responsive iFrame
         height: '100%',
         width: '100%',
 
         // Load the first song
-        videoId: songs[0],
+        videoId: playlist.songs[0],
         events: {
-            'onStateChange': onPlayerStateChange
+            'onStateChange': playlist.stateChange
         }
     });
 }
 
-function onPlayerStateChange(event) {
-    switch (event.data) {
-
-        case YT.PlayerState.ENDED:
-
-            // Video has ended, so play next song
-            next();
-            playing = false;
-            break;
-
-        case YT.PlayerState.PLAYING:
-
-            // Video is playing
-            playing = true;
-            break;
-
-        case YT.PlayerState.PAUSED:
-
-            // Video is paused
-            playing = false;
-            break;
-    }
-
-    // Make all songs inactive, then activate the current video
-    $('[data-video-id]').removeClass('active');
-
-    // Check that method exists so when it goes to the next song it does not throw an error
-    if (typeof player.getVideoData() !== 'undefined') {
-        $('[data-video-id=' + player.getVideoData().video_id + ']').addClass('active');
-    }
-
-    // Change play button
-    $('#play-icon').attr('class', 'fa fa-' + (playing ? 'pause' : 'play'));
-}
-
 /*
- * Genre input
+  ######   ######## ##    ## ########  ########    #### ##    ## ########  ##     ## ########
+ ##    ##  ##       ###   ## ##     ## ##           ##  ###   ## ##     ## ##     ##    ##
+ ##        ##       ####  ## ##     ## ##           ##  ####  ## ##     ## ##     ##    ##
+ ##   #### ######   ## ## ## ########  ######       ##  ## ## ## ########  ##     ##    ##
+ ##    ##  ##       ##  #### ##   ##   ##           ##  ##  #### ##        ##     ##    ##
+ ##    ##  ##       ##   ### ##    ##  ##           ##  ##   ### ##        ##     ##    ##
+  ######   ######## ##    ## ##     ## ########    #### ##    ## ##         #######     ##
  */
+// Only load if required
 if ($('#input-genre').length) {
-    // Load genres
     $.ajax({
         url: '/api/genres',
         success: function (genres) {
@@ -127,13 +190,21 @@ if ($('#input-genre').length) {
     });
 }
 
+/**
+ * Load genres and display them in the input
+ *
+ * @param {Array} genres
+ */
 function loadGenres(genres) {
 
     /*
      * Functions
      */
-
-    // Recursively expand all the node's parents
+    /**
+     * Recursively expand a parents nodes
+     *
+     * @param {Object} node
+     */
     var expandParents = function(node) {
         var parent = $tree.treeview('getParent', node);
 
@@ -174,12 +245,22 @@ function loadGenres(genres) {
         /*
          * Events
          */
-        // Set the input value so it is sent on form submit
+        /**
+         * Set the input value so it is submitted with the form
+         *
+         * @param {Object} event
+         * @param {Object} node
+         */
         onNodeSelected: function (event, node) {
             $input.val(node.text);
         },
 
-        // Preselect the correct genre
+        /**
+         * Preselect the correct genre
+         *
+         * @param {Object} event
+         * @param {Object} results
+         */
         onSearchComplete: function (event, results) {
             if (!$.isEmptyObject(results)) {
                 var node = results[0];
