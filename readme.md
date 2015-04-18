@@ -6,12 +6,18 @@ If you want to change a playlist, you can fork it and create your own version.
 
 ## Installation
 
-First, make sure you have `npm`, `gulp` and `bower` installed.
+First, make sure you have `composer`, `npm`, `gulp` and `bower` installed.
 
 Clone the repo
 
 ```
 git clone https://github.com/natzim/OpenPlaylists
+```
+
+Install composer dependencies
+
+```
+composer install
 ```
 
 Rename the example environment file
@@ -37,12 +43,6 @@ Set up databases
 
 ```
 php artisan migrate
-```
-
-Seed databases (for testing)
-
-```
-php artisan db:seed
 ```
 
 ## Contributing
