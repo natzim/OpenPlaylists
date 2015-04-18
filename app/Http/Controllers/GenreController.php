@@ -1,19 +1,29 @@
 <?php namespace App\Http\Controllers;
 
 use App\Genre;
+use Illuminate\Support\Facades\Cache;
 
 class GenreController extends Controller {
 
     public function index()
     {
-        // Only include certain information
-        $include = ['id', 'parent_id', 'name'];
+        if (Cache::has('genres'))
+        {
+            return Cache::get('genres');
+        }
+        else
+        {
+            // Only include certain information
+            $include = ['id', 'parent_id', 'name'];
 
-        $genres = Genre::root()->getDescendantsAndSelf($include)->toHierarchy();
+            $genres = Genre::root()->getDescendantsAndSelf($include)->toHierarchy();
 
-        $genres = $this->cleanup($genres->toArray());
+            $genres = $this->cleanup($genres->toArray())[1];
 
-        return $genres[1];
+            Cache::forever('genres', $genres);
+
+            return $genres;
+        }
     }
 
     /**
