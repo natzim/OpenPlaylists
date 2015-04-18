@@ -22,6 +22,7 @@ Install resources
 
 ```
 bower install
+gulp
 ```
 
 Set up databases

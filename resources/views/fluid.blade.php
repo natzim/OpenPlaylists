@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OpenPlaylists</title>
 
-    <link rel="stylesheet" href="/vendor/bootswatch-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
         :focus {
             outline: 0 !important;
@@ -87,8 +86,7 @@
 
 @yield('stuff')
 
-<script src="/vendor/jquery/dist/jquery.min.js"></script>
-<script src="/vendor/bootswatch-dist/js/bootstrap.min.js"></script>
+<script src="/js/app.js"></script>
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
