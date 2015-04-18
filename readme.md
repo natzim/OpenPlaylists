@@ -6,6 +6,8 @@ If you want to change a playlist, you can fork it and create your own version.
 
 ## Installation
 
+First, make sure you have `npm`, `gulp` and `bower` installed.
+
 Clone the repo
 
 ```
@@ -16,6 +18,12 @@ Rename the example environment file
 
 ```
 mv .env.example .env
+```
+
+Install npm dependencies
+
+```
+npm install
 ```
 
 Install resources
