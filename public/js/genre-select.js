@@ -8,7 +8,19 @@ $.ajax({
 
 function loadGenres(genres) {
 
-    console.log(genres);
+    /*
+     * Functions
+     */
+
+    // Recursively expand all the node's parents
+    var expandParents = function(node) {
+        var parent = $tree.treeview('getParent', node);
+
+        if (parent !== $tree) {
+            $tree.treeview('expandNode', parent);
+            expandParents(parent);
+        }
+    };
 
     /*
      * jQuery objects
@@ -63,16 +75,6 @@ function loadGenres(genres) {
             ignoreCase: true,
             exactMatch: true
         }]);
-    }
-
-    // Recursively expand all the node's parents
-    function expandParents(node) {
-        var parent = $tree.treeview('getParent', node);
-
-        if (parent !== $tree) {
-            $tree.treeview('expandNode', parent);
-            expandParents(parent);
-        }
     }
 
 }
