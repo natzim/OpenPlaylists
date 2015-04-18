@@ -29,8 +29,11 @@ class GenreController extends Controller {
         {
             $value['text'] = $value['name'];
             $value['nodes'] = $value['children'];
+
             unset($value['name']);
             unset($value['children']);
+            unset($value['id']);
+            unset($value['parent_id']);
 
             if (empty($value['nodes']))
             {
