@@ -19,6 +19,7 @@ class GenreController extends Controller {
         else
         {
             // Only include certain information
+            // We need 'id' and 'parent_id' for Baum to be able to make the structure properly
             $include = ['id', 'parent_id', 'name'];
 
             $genres = Genre::root()->getDescendantsAndSelf($include)->toHierarchy();
@@ -42,16 +43,21 @@ class GenreController extends Controller {
     {
         foreach($array as &$value)
         {
+            // Rename 'name' to 'text' and 'children' to 'nodes'
+            // So it can be used by Bootstrap Treeview
             $value['text'] = $value['name'];
             $value['nodes'] = $value['children'];
-
             unset($value['name']);
             unset($value['children']);
+
+            // Remove unused elements so the payload isn't too big
             unset($value['id']);
             unset($value['parent_id']);
 
             if (empty($value['nodes']))
             {
+                // Baum creates empty children arrays even if it has no children, so let's remove them so we don't
+                // confuse Bootstrap Treeview
                 unset($value['nodes']);
             }
             else
