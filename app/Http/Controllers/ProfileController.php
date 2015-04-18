@@ -12,12 +12,12 @@ class ProfileController extends Controller {
      *
      * @return \Illuminate\View\View
      */
-	public function show($username)
-	{
+    public function show($username)
+    {
         // Eager loading doesn't work here for some reason
-		$user = User::findByNameOrFail($username);
+        $user = User::findByNameOrFail($username);
 
         return view('users.show', compact('user'));
-	}
+    }
 
 }
