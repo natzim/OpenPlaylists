@@ -18,6 +18,6 @@
 
 ## Development
 
-- [ ] Fix `Model::unguard()` needing to be called twice. Issue #1
 - [ ] Add foreign keys
 - [x] Gulp to manage resources
+- [x] Fix `Model::unguard()` needing to be called twice. Issue #1

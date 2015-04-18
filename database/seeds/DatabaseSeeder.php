@@ -15,9 +15,12 @@ class DatabaseSeeder extends Seeder {
         Model::unguard();
 
         $this->call('UserTableSeeder');
-        $this->call('GenreTableSeeder');
         $this->call('PlaylistTableSeeder');
         $this->call('SongTableSeeder');
+
+        // Keep this in the last position
+        // Baum re-guards all models after building a tree, so it broke the other seeders
+        $this->call('GenreTableSeeder');
     }
 
 }
