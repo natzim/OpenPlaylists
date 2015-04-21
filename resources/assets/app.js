@@ -19,19 +19,6 @@ $(document).ready(function () {
 
 });
 
-/**
- * Slide toggle an element
- *
- * Example:
- * <span data-toggle="slide" data-target="#slide-me">Click me!</span>
- * <div id="slide-me">Hello World!</div>
- *
- * #slide-me will be slide toggled every time the <span> element is clicked
- */
-$('[data-toggle=slide]').click(function() {
-    $($(this).data('target')).slideToggle();
-});
-
 /*
  ########  ##          ###    ##    ## ##       ####  ######  ########
  ##     ## ##         ## ##    ##  ##  ##        ##  ##    ##    ##

@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <div class="well">
-                <label for="genre" data-toggle="slide" data-target=".treeview">Genre</label>
+                <label for="genre">Genre</label>
                 @include('partials.genre-select')
             </div>
         </div>
