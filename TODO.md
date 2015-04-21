@@ -6,6 +6,8 @@
 
 - [ ] Creation of playlists
 - [ ] Editing of playlists
+- [ ] Fix pagination on search results with a specific genre or search term. Issue #2
+- [x] Searching for a specific genre should also retrieve results from its subgenres
 
 ### Genres
 
