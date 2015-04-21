@@ -243,6 +243,13 @@ function loadGenres(genres) {
         },
 
         /**
+         * Removes the input value if the node is deselected
+         */
+        onNodeUnselected: function () {
+            $input.val('');
+        },
+
+        /**
          * Preselect the correct genre
          *
          * @param {Object} event
