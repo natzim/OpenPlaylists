@@ -3,4 +3,6 @@
 @else
     <input type="hidden" name="genre" id="genre">
 @endif
-<div id="input-genre"></div>
+<div id="input-genre">
+    <i class="fa fa-circle-o-notch fa-spin"></i> Loading genres...
+</div>
