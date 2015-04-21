@@ -171,7 +171,7 @@ function onYouTubeIframeAPIReady() {
 if ($('#input-genre').length) {
     $.ajax({
         url: '/api/genres',
-        success: function (genres) {
+        success: function(genres) {
             loadGenres(genres);
         }
     });
@@ -238,14 +238,14 @@ function loadGenres(genres) {
          * @param {Object} event
          * @param {Object} node
          */
-        onNodeSelected: function (event, node) {
+        onNodeSelected: function(event, node) {
             $input.val(node.text);
         },
 
         /**
          * Removes the input value if the node is deselected
          */
-        onNodeUnselected: function () {
+        onNodeUnselected: function() {
             $input.val('');
         },
 
@@ -255,7 +255,7 @@ function loadGenres(genres) {
          * @param {Object} event
          * @param {Object} results
          */
-        onSearchComplete: function (event, results) {
+        onSearchComplete: function(event, results) {
             if (!$.isEmptyObject(results)) {
                 var node = results[0];
 
