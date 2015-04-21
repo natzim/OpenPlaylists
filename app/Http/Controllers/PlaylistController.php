@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Genre;
 use App\Http\Requests;
 
 use App\Playlist;
@@ -39,9 +40,15 @@ class PlaylistController extends Controller {
         {
             $playlists->whereHas('genre', function ($q)
             {
-                $genre = Request::input('genre');
+                $parentGenre = Genre::where('name', Request::input('genre'))->firstOrFail();
 
-                $q->where('name', $genre);
+                // Fetch all child genres as well as parent genre
+                $genres = $parentGenre->descendantsAndSelf()->get()->toArray();
+
+                // Fetch only the genre name
+                $genres = array_fetch($genres, 'name');
+
+                $q->whereIn('name', $genres);
             });
         }
 
