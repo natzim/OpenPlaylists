@@ -54,6 +54,12 @@ class PlaylistController extends Controller {
 
         $playlists = $playlists->simplePaginate(15);
 
+        // Include the search term and genre in next page
+        $playlists = $playlists->appends([
+            'search' => Request::input('search'),
+            'genre' => Request::input('genre'),
+        ]);
+
         return view('playlists.index', compact('playlists'));
     }
 
