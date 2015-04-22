@@ -43,7 +43,7 @@ class PlaylistController extends Controller {
                 $parentGenre = Genre::where('name', Request::input('genre'))->firstOrFail();
 
                 // Fetch all child genres as well as parent genre
-                $genres = $parentGenre->descendantsAndSelf()->get()->toArray();
+                $genres = $parentGenre->getDescendantsAndSelf()->toArray();
 
                 // Fetch only the genre name
                 $genres = array_fetch($genres, 'name');
