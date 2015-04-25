@@ -14,7 +14,9 @@ class ProfileController extends Controller {
      */
     public function show($username)
     {
-        $user = User::findByNameOrFail($username);
+        $user = User::with('playlists.user', 'playlists.genre', 'playlists.songs')
+            ->findByNameOrFail($username)
+            ->firstOrFail();
 
         return view('users.show', compact('user'));
     }
