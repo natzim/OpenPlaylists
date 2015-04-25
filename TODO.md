@@ -16,7 +16,7 @@
 
 ## Performance
 
-- [ ] Eager loading
+- [x] Eager loading
 
 ## Development
 

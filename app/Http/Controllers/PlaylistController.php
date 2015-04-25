@@ -34,7 +34,7 @@ class PlaylistController extends Controller {
 
         $query = Request::input('search');
 
-        $playlists = Playlist::search($query);
+        $playlists = Playlist::with('user', 'genre', 'songs')->search($query);
 
         if (Request::has('genre'))
         {
