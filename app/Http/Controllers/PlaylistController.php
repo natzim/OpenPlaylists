@@ -191,7 +191,7 @@ class PlaylistController extends Controller {
         }
         else
         {
-            $forkedPlaylist = Playlist::with('songs')->findBySlugOrFail($slug);
+            $forkedPlaylist = Playlist::findBySlugOrFail($slug);
         }
 
         $playlist = $forkedPlaylist->replicate();
