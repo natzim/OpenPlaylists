@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Playlist extends Model implements SluggableInterface {
 
-    use SluggableTrait;
-    use SearchableTrait;
-    use SoftDeletes;
+    use SluggableTrait, SearchableTrait, SoftDeletes;
 
     protected $table = 'playlists';
 
