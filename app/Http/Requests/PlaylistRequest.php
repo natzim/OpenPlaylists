@@ -8,7 +8,7 @@ class PlaylistRequest extends FormRequest {
     public function rules()
     {
         return [
-            'name' => 'required|max:100'
+            'name' => 'required|not_reserved|max:100'
         ];
     }
 

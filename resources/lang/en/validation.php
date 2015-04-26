@@ -86,8 +86,8 @@ return [
     */
 
     'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'not_reserved' => 'The given name is reserved.',
         ],
     ],
 
