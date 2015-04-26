@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Illuminate\Support\Facades\Cache;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,8 +31,12 @@ class Playlist extends Model implements SluggableInterface {
      */
     public function scopeFindBySlugOrFail($query, $slug)
     {
-        return $query->where('slug', $slug)
-            ->firstOrFail();
+        $playlist = Cache::rememberForever('playlist_' . $slug, function () use ($query, $slug)
+        {
+            return $query->where('slug', $slug)->firstOrFail();
+        });
+
+        return $playlist;
     }
 
     /**

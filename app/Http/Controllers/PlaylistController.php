@@ -101,16 +101,7 @@ class PlaylistController extends Controller {
      */
     public function show($slug)
     {
-        if (Cache::has('playlist_' . $slug))
-        {
-            $playlist = Cache::get('playlist_' . $slug);
-        }
-        else
-        {
-            $playlist = Playlist::findBySlugOrFail($slug);
-
-            Cache::forever('playlist_' . $slug, $playlist);
-        }
+        $playlist = Playlist::findBySlugOrFail($slug);
 
         return view('playlists.show', compact('playlist'));
     }
@@ -185,14 +176,7 @@ class PlaylistController extends Controller {
      */
     public function fork($slug)
     {
-        if (Cache::has('playlist_' . $slug))
-        {
-            $forkedPlaylist = Cache::get('playlist_' . $slug);
-        }
-        else
-        {
-            $forkedPlaylist = Playlist::findBySlugOrFail($slug);
-        }
+        $forkedPlaylist = Playlist::findBySlugOrFail($slug);
 
         $playlist = $forkedPlaylist->replicate();
 
