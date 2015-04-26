@@ -4,7 +4,7 @@
  * Home page
  */
 
-Route::get('/', function ()
+get('/', function ()
 {
     return view('welcome');
 });
@@ -13,20 +13,20 @@ Route::get('/', function ()
  * Playlists
  */
 
-Route::post('playlists/{slug}/fork', [
+post('playlists/{slug}/fork', [
     'uses' => 'PlaylistController@fork',
     'as' => 'playlists.fork'
 ]);
 
-Route::resource('playlists', 'PlaylistController');
+resource('playlists', 'PlaylistController');
 
 /*
  * Profiles
  */
 
-Route::get('user/{name}', [
+get('user/{name}', [
     'uses' => 'ProfileController@show',
-    'as'   => 'users.show'
+    'as' => 'users.show'
 ]);
 
 /*
@@ -35,7 +35,7 @@ Route::get('user/{name}', [
 
 Route::group(['prefix' => 'api'], function ()
 {
-    Route::get('genres', 'GenreController@index');
+    get('genres', 'GenreController@index');
 });
 
 /*
