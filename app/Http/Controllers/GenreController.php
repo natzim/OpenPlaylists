@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Genre;
-use Illuminate\Support\Facades\Cache;
+
+use Cache;
 
 class GenreController extends Controller {
 

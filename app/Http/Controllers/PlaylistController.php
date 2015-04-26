@@ -1,14 +1,14 @@
 <?php namespace App\Http\Controllers;
 
 use App\Genre;
-use App\Http\Requests;
-
 use App\Playlist;
+
 use App\Http\Requests\PlaylistRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
+
+use Auth;
+use Cache;
+use Request;
+use Session;
 
 class PlaylistController extends Controller {
 
