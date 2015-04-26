@@ -4,7 +4,7 @@
  * Home page
  */
 
-get('/', function ()
+get('/', function()
 {
     return view('welcome');
 });
@@ -33,7 +33,7 @@ get('user/{name}', [
  * API
  */
 
-Route::group(['prefix' => 'api'], function ()
+Route::group(['prefix' => 'api'], function()
 {
     get('genres', 'GenreController@index');
 });

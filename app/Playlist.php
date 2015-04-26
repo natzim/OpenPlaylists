@@ -31,7 +31,7 @@ class Playlist extends Model implements SluggableInterface {
      */
     public function scopeFindBySlugOrFail($query, $slug)
     {
-        $playlist = Cache::rememberForever('playlist_' . $slug, function () use ($query, $slug)
+        $playlist = Cache::rememberForever('playlist_' . $slug, function() use ($query, $slug)
         {
             return $query->where('slug', $slug)->firstOrFail();
         });
