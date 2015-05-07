@@ -30,6 +30,18 @@ get('user/{name}', [
 ]);
 
 /*
+ * Admin
+ */
+
+Route::group(['prefix' => 'admin'], function()
+{
+    get('/', [
+        'uses' => 'AdminController@dashboard',
+        'as' => 'admin.dashboard'
+    ]);
+});
+
+/*
  * API
  */
 
